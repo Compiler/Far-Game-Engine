@@ -3,19 +3,13 @@
 #include <GLFW/glfw3.h>
 #include <stdio.h>
 namespace far{
-
-
+    //static class
     class StartupSystems{
-
-        private:
-            void _initGLFW();
-            void _initGlad();
         public:
-
-        void initSubSystems();
-
-
+            static void _initGLFW();
+            static void _initGlad();
+            StartupSystems() = delete;
+            StartupSystems operator=(const StartupSystems&) = delete;
+            static void initSubSystems();
     };
-
-
 }

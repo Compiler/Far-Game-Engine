@@ -16,7 +16,9 @@ namespace far{
             static float SCREEN_HEIGHT;
 
             Window(float width, float height, const char name[], bool fullscreen = false);
-    
+
+
+            GLFWwindow* getWindow()const{return _window;}
 
     };
 
