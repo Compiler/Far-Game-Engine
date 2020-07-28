@@ -23,7 +23,7 @@ LINKS = -lglfw3 -lglu32 -lopengl32 -lgdi32
 all: main
 
 main: $(ENTRY_POINT) TextLoader.o
-	$(CXX) $(CXXFLAGS) $(LIBS) $(INC) -o $(OUT_DIR)/$(LAUNCHER_NAME) $(ENTRY_POINT) $(GLAD_SRC)/glad.c $(LINKS)
+	$(CXX) $(CXXFLAGS) $(LIBS) $(INC) -o $(OUT_DIR)/$(LAUNCHER_NAME) $(OUT_DIR)/TextLoader.o $(ENTRY_POINT) $(GLAD_SRC)/glad.c $(LINKS)
 
 
 
@@ -40,4 +40,4 @@ run: $(OUT_DIR)/$(LAUNCHER_NAME).exe
 
 clean:
 	cd $(OUT_DIR)
-	rm -f Gerl.exe
+	rm -f Far.exe
