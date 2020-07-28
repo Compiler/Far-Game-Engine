@@ -3,9 +3,9 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <Rendering/Window.h>
-#include <Files/TextLoader.h>
+#include <Tools/Files/TextLoader.h>
 #include <Startup/StartupSystems.h>
-#include "../outsourced/glm/glm/vec3.hpp"
+#include <glm/vec3.hpp>
 #include <iostream>
 namespace far{
 
