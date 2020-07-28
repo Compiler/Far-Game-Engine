@@ -30,7 +30,7 @@ LINKS = -lglfw3 -lglu32 -lopengl32 -lgdi32
 all: main
 
 main: $(ENTRY_POINT) FarCore.o
-	$(CXX) $(CXXFLAGS) $(LIBS) $(INC) -o $(OUT_DIR)/$(LAUNCHER_NAME) $(OUT_DIR)/Logger.o $(OUT_DIR)/TextLoader.o $(OUT_DIR)/StartupSystems.o $(OUT_DIR)/Window.o $(OUT_DIR)/FarCore.o $(ENTRY_POINT) $(GLAD_SRC)/glad.c $(LINKS)
+	$(CXX) $(CXXFLAGS) $(LIBS) $(INC) -o $(OUT_DIR)/$(LAUNCHER_NAME) $(OUT_DIR)/TextLoader.o $(OUT_DIR)/StartupSystems.o $(OUT_DIR)/Window.o $(OUT_DIR)/FarCore.o $(ENTRY_POINT) $(GLAD_SRC)/glad.c $(LINKS)
 
 
 FarCore.o: $(SRC_DIR)/FarCore.cpp StartupSystems.o TextLoader.o Window.o
