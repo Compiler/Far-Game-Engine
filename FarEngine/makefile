@@ -53,8 +53,10 @@ run: $(OUT_DIR)/$(LAUNCHER_NAME).exe
 	./$(OUT_DIR)/$(LAUNCHER_NAME).exe
 
 
-
-
+git:
+	git add -A
+	git commit -m "added stuff"
+	git push origin master
 
 
 clean:
