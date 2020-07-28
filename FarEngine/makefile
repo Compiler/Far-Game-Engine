@@ -33,20 +33,21 @@ main: $(ENTRY_POINT) FarCore.o
 	$(CXX) $(CXXFLAGS) $(LIBS) $(INC) -o $(OUT_DIR)/$(LAUNCHER_NAME) $(OUT_DIR)/TextLoader.o $(OUT_DIR)/StartupSystems.o $(OUT_DIR)/Window.o $(OUT_DIR)/FarCore.o $(ENTRY_POINT) $(GLAD_SRC)/glad.c $(LINKS)
 
 
+ALL_SETTINGS = $(CXX) $(CXXFLAGS) $(LIBS) $(INC) $(INC_INTERNAL)
 FarCore.o: $(SRC_DIR)/FarCore.cpp StartupSystems.o TextLoader.o Window.o
-	$(CXX) $(CXXFLAGS) $(LIBS) $(INC) $(INC_INTERNAL) -c $(SRC_DIR)/FarCore.cpp -o $(OUT_DIR)/FarCore.o
+	$(ALL_SETTINGS) -c $(SRC_DIR)/FarCore.cpp -o $(OUT_DIR)/FarCore.o
 
 StartupSystems.o: $(SRC_DIR)/Startup/StartupSystems.cpp
-	$(CXX) $(CXXFLAGS) $(LIBS) $(INC) $(INC_INTERNAL) -c $(SRC_DIR)/Startup/StartupSystems.cpp -o $(OUT_DIR)/StartupSystems.o
+	$(ALL_SETTINGS) -c $(SRC_DIR)/Startup/StartupSystems.cpp -o $(OUT_DIR)/StartupSystems.o
 
 TextLoader.o: $(SRC_DIR)/Tools/Files/TextLoader.cpp
-	$(CXX) $(CXXFLAGS) $(LIBS) $(INC) $(INC_INTERNAL) -c $(SRC_DIR)/Tools/Files/TextLoader.cpp -o $(OUT_DIR)/TextLoader.o
+	$(ALL_SETTINGS) -c $(SRC_DIR)/Tools/Files/TextLoader.cpp -o $(OUT_DIR)/TextLoader.o
 
 Window.o: $(SRC_DIR)/Rendering/Window.cpp
-	$(CXX) $(CXXFLAGS) $(LIBS) $(INC) $(INC_INTERNAL) -c $(SRC_DIR)/Rendering/Window.cpp -o $(OUT_DIR)/Window.o
+	$(ALL_SETTINGS) -c $(SRC_DIR)/Rendering/Window.cpp -o $(OUT_DIR)/Window.o
 
 Logger.o: $(SRC_DIR)/Tools/Logging/Logger.cpp
-	$(CXX) $(CXXFLAGS) $(LIBS) $(INC) $(INC_INTERNAL) -c $(SRC_DIR)/Tools/Logging/Logger.cpp -o $(OUT_DIR)/Logger.o
+	$(ALL_SETTINGS) -c $(SRC_DIR)/Tools/Logging/Logger.cpp -o $(OUT_DIR)/Logger.o
 
 run: $(OUT_DIR)/$(LAUNCHER_NAME).exe
 	./$(OUT_DIR)/$(LAUNCHER_NAME).exe

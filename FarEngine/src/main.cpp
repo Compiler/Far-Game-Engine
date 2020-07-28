@@ -3,6 +3,9 @@
 
 int main(){
 
+	
+
+
 	far::FarCore* core = new far::FarCore();
 	core->load();
 	while(core->isRunning()){
