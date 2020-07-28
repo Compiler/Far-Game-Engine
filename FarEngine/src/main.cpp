@@ -131,6 +131,8 @@ int main(){
 		
 		glClearColor(0.2, 0.1, 0.2, 1.0);
 		glUseProgram(shaderProgram);
+		int loc = glGetUniformLocation(shaderProgram, "time");
+		glUniform1f(loc, glfwGetTime());
 		glBindVertexArray(arrayID);
 		glDrawArrays(GL_TRIANGLES, 0, 6);
 		glfwPollEvents();
