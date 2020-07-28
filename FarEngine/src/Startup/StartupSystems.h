@@ -1,20 +1,18 @@
 #pragma once
 #include <glad/glad.h>
+#include <GLFW/glfw3.h>
+#include <stdio.h>
 namespace far{
 
 
     class StartupSystems{
 
+        private:
+            void _initGLFW();
+            void _initGlad();
         public:
 
-        void initGLFW(){
-
-            if(!glfwInit()) printf("Failed to init glfw");
-            glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);//version 4.6 Core profile
-            glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
-            glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-            glfwWindowHint(GLFW_RESIZABLE, GL_TRUE);
-        }
+        void initSubSystems();
 
 
     };

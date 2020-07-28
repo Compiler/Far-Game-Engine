@@ -23,15 +23,15 @@ LINKS = -lglfw3 -lglu32 -lopengl32 -lgdi32
 all: main
 
 main: $(ENTRY_POINT) TextLoader.o
-	$(CXX) $(CXXFLAGS) $(LIBS) $(INC) -o $(OUT_DIR)/$(LAUNCHER_NAME) $(OUT_DIR)/TextLoader.o $(ENTRY_POINT) $(GLAD_SRC)/glad.c $(LINKS)
+	$(CXX) $(CXXFLAGS) $(LIBS) $(INC) -o $(OUT_DIR)/$(LAUNCHER_NAME) $(OUT_DIR)/TextLoader.o $(OUT_DIR)/Window.o $(ENTRY_POINT) $(GLAD_SRC)/glad.c $(LINKS)
 
 
 
 TextLoader.o: $(SRC_DIR)/Files/TextLoader.cpp
-	$(CXX) $(CXXFLAGS) $(INC_INTERNAL) -c $(SRC_DIR)/Files/TextLoader.cpp -o $(OUT_DIR)/TextLoader.o
+	$(CXX) $(CXXFLAGS) $(LIBS) $(INC) $(INC_INTERNAL) -c $(SRC_DIR)/Files/TextLoader.cpp -o $(OUT_DIR)/TextLoader.o
 
 Window.o: $(SRC_DIR)/Rendering/Window.cpp
-	$(CXX) $(CXXFLAGS) $(INC_INTERNAL) -c $(SRC_DIR)/Rendering/Window.cpp -o $(OUT_DIR)/Window.o
+	$(CXX) $(CXXFLAGS) $(LIBS) $(INC) $(INC_INTERNAL) -c $(SRC_DIR)/Rendering/Window.cpp -o $(OUT_DIR)/Window.o
 
 run: $(OUT_DIR)/$(LAUNCHER_NAME).exe
 	./$(OUT_DIR)/$(LAUNCHER_NAME).exe
@@ -43,5 +43,4 @@ run: $(OUT_DIR)/$(LAUNCHER_NAME).exe
 
 clean:
 	cd $(OUT_DIR)
-	rm -f *.o
-	rm -f Far.exe
+	-rm edit *.o

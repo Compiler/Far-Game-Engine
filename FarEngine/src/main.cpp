@@ -6,17 +6,16 @@
 #include <iostream>
 
 
+
 unsigned int shaderProgram = 0;
 void initShader(const char* vertexFile, const char* fragmentFile){
 	unsigned int vertexShader, fragmentShader;
 
 	std::string vertSrc, fragSrc;
 	far::loadTextFromFile(vertexFile, vertSrc);
-	std::cout << "Start:" << vertSrc << "\n";
 	far::loadTextFromFile(fragmentFile, fragSrc);
 	const char* vert = vertSrc.c_str();
 	const char* frag = fragSrc.c_str();
-	printf("Sup");
 	vertexShader = glCreateShader(GL_VERTEX_SHADER);
 	glShaderSource(vertexShader, 1, &vert, NULL);
 	glCompileShader(vertexShader);
@@ -64,7 +63,6 @@ void initShader(const char* vertexFile, const char* fragmentFile){
 }
 
 int main(){
-	std::cout << "test \n";
 	if(!glfwInit()) printf("Failed to init glfw");
 
 
@@ -88,7 +86,7 @@ int main(){
 	initShader("src/Resources/Shaders/pass.vert", "src/Resources/Shaders/RayMarching.frag");
 	glUseProgram(shaderProgram);
 
-	float sz = 0.75f;
+	float sz = 1.f;
 	float vertices[7 * 6] = {
 		-sz, -sz, 0.0f, 	1.0f, 1.0f, 1.0f, 1.0f, // bottom left
 		-sz,  sz, 0.0f,	1.0f, 1.0f, 1.0f, 1.0f, // top left
