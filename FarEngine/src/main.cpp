@@ -1,26 +1,21 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <stdio.h>
+#include <Files/TextLoader.h>
+#include <string>
+#include <iostream>
 
-
-void check(){
-	static int callCount = 1;
-	printf("Called %d times", callCount++);
-	const GLenum err = glGetError();
-	if (err == GL_NO_ERROR){
-
-	}else{
-		printf("ERROR::\t error" );
-	}
-}
 
 unsigned int shaderProgram = 0;
 void initShader(const char* vertexFile, const char* fragmentFile){
 	unsigned int vertexShader, fragmentShader;
 
-	const char* vert = getTextContents(vertexFile);
-	const char* frag = getTextContents(fragmentFile);
-
+	std::string vertSrc, fragSrc;
+	far::loadTextFromFile(vertexFile, vertSrc);
+	far::loadTextFromFile(fragmentFile, fragSrc);
+	const char* vert = vertSrc.c_str();
+	const char* frag = fragSrc.c_str();
+	printf("Sup");
 	vertexShader = glCreateShader(GL_VERTEX_SHADER);
 	glShaderSource(vertexShader, 1, &vert, NULL);
 	glCompileShader(vertexShader);
@@ -68,6 +63,7 @@ void initShader(const char* vertexFile, const char* fragmentFile){
 }
 
 int main(){
+	std::cout << "test \n";
 	if(!glfwInit()) printf("Failed to init glfw");
 
 
