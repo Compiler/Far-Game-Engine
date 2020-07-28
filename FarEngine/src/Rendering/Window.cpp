@@ -9,9 +9,11 @@ namespace far{
         Window::SCREEN_HEIGHT = height; Window::SCREEN_WIDTH = width; _windowName = name;
         _window = glfwCreateWindow(width, height, name, NULL, NULL);
         glfwMakeContextCurrent(_window);
+        
         if(!_window){
 		    printf("!!Failed to load window!!");
 	    }
+
     }
 
 
