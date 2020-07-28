@@ -5,12 +5,10 @@
 namespace far{
 
 
-struct TransformComponent : public Component{
-
-    ComponentID getID()override{return 1;}
+    DEFINE_COMPONENT(TransformComponent)
 
     glm::vec3 position;
 
-};
+    }
 
 }

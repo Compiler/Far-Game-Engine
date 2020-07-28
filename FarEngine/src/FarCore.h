@@ -7,7 +7,10 @@
 #include <Startup/StartupSystems.h>
 #include <glm/vec3.hpp>
 #include <iostream>
-//#include <EntityComponentSystem/EntityManager.h>
+#include <EntityComponentSystem/EntityManager.h>
+#include <EntityComponentSystem/Components/TransformComponent.h>
+#include <EntityComponentSystem/Components/Component.h>
+
 namespace far{
 
     class FarCore{
@@ -16,12 +19,17 @@ namespace far{
             far::Window* _windowRef;
             glm::vec3 thing;
 
-           // std::unique_ptr<EntityManager> _entityManager;
+            std::unique_ptr<EntityManager> _entityManager;
             
         public:
 
             void initForPep(){
-                
+                _entityManager = std::make_unique<EntityManager>();
+                far::Entity entity1 = _entityManager->createEntity();
+                std::shared_ptr<far::TransformComponent> trans = std::make_shared<TransformComponent>();
+                trans->position = glm::vec3(2,4,5);
+                _entityManager->addComponent(entity1, trans);
+
 
             }
 

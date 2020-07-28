@@ -24,7 +24,10 @@ namespace far{
 
             }
 
-            void addComponent(Entity ent, std::shared_ptr<Component> comp){
+            template<typename T>
+			void attachComponent(Entity entity, std::shared_ptr<T> component){
+            }
+            void addComponent(Entity ent, std::shared_ptr<TransformComponent> comp){
                 _ecsMap[ent][comp->getID()] = comp;
             }
 
