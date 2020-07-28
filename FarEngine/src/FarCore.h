@@ -5,14 +5,15 @@
 #include <Rendering/Window.h>
 #include <Files/TextLoader.h>
 #include <Startup/StartupSystems.h>
-
+#include "../outsourced/glm/glm/vec3.hpp"
+#include <iostream>
 namespace far{
 
     class FarCore{
 
         private:
             far::Window* _windowRef;
-            
+            glm::vec3 thing;
 
             
         public:

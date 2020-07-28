@@ -15,8 +15,15 @@ GLFW_INC = $(GLFW_ROOT)include
 GLFW_LIB = $(GLFW_ROOT)lib
 GLFW_SRC = $(GLFW_ROOT)../src
 
+
+SPDLOG_ROOT = outsourced/spdlog/
+SPDLOG_INC = $(SPDLOG_ROOT)include
+SPDLOG_SRC = $(GLFW_ROOT)src
+
+GLM_ROOT = outsourced/glm/
+
 INC_INTERNAL = -I $(SRC_DIR)
-INC=-I $(SRC_DIR)/ -I $(GLAD_INC) -I $(GLFW_INC)
+INC=-I $(SRC_DIR)/ -I $(GLAD_INC) -I $(GLFW_INC) -I $(SPDLOG_INC) 
 LIBS = -L $(GLFW_LIB)
 LINKS = -lglfw3 -lglu32 -lopengl32 -lgdi32
 
