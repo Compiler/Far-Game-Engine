@@ -58,7 +58,6 @@ fetch:
 	git fetch --all
 	git reset --hard origin/master
 
-	
+
 clean:
-	cd $(OUT_DIR)
-	-rm edit *.o
+	del /f $(OUT_DIR)/$(LAUNCHER_NAME).exe
