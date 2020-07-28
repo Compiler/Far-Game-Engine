@@ -58,7 +58,9 @@ git:
 	git commit -m "added stuff"
 	git push origin master
 
-
+fetch:
+	git fetch -all
+	git reset --hard origin/master
 clean:
 	cd $(OUT_DIR)
 	-rm edit *.o
