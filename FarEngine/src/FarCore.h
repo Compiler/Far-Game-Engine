@@ -7,6 +7,7 @@
 #include <Startup/StartupSystems.h>
 #include <glm/vec3.hpp>
 #include <iostream>
+//#include <EntityComponentSystem/EntityManager.h>
 namespace far{
 
     class FarCore{
@@ -15,12 +16,13 @@ namespace far{
             far::Window* _windowRef;
             glm::vec3 thing;
 
+           // std::unique_ptr<EntityManager> _entityManager;
             
         public:
 
             void initForPep(){
-
                 
+
             }
 
             void load();
