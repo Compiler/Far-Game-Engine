@@ -12,6 +12,7 @@ void initShader(const char* vertexFile, const char* fragmentFile){
 
 	std::string vertSrc, fragSrc;
 	far::loadTextFromFile(vertexFile, vertSrc);
+	std::cout << "Start:" << vertSrc << "\n";
 	far::loadTextFromFile(fragmentFile, fragSrc);
 	const char* vert = vertSrc.c_str();
 	const char* frag = fragSrc.c_str();
@@ -140,7 +141,7 @@ int main(){
 	glfwDestroyWindow(window);
 	glfwTerminate();
 
-   // return 4;
+    return 4;
 }
 
 
