@@ -6,6 +6,7 @@ namespace far{
 
    
     void FarCore::load(){
+		initForPep();
         //StartupSystems::initSubSystems();
         StartupSystems::_initGLFW();
         _windowRef = new Window(1080, 720, "Far Game Engine", false);

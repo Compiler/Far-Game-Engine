@@ -18,6 +18,11 @@ namespace far{
             
         public:
 
+            void initForPep(){
+
+                
+            }
+
             void load();
             void update();
             void render();
