@@ -30,7 +30,7 @@ namespace far{
                 trans->position = glm::vec3(2,4,5);
                 _entityManager->addComponent(entity1, trans);
                 std::shared_ptr<far::TransformComponent> type = _entityManager->getComponent<TransformComponent>(entity1);
-
+                std::cout << type->position.x; //ec works, now we need to make the s in ecs work
             }
 
             void load();
