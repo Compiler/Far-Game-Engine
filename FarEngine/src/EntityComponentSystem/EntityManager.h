@@ -34,7 +34,7 @@ namespace far{
                 _ecsMap[ent][id] = comp;
                 if(_components.find(id) != _components.end() ){
                     _components[id].push_back(comp);
-                }//else _components[id] = std::vector<std::shared_ptr<Component>>();
+                }//else _components[id] = st/d::vector<std::shared_ptr<Component>>();
 
             }
 
