@@ -56,8 +56,27 @@ namespace far{
 
             template <typename CompType>
             std::vector<std::shared_ptr<CompType>> getComponentsList(){
-                return _components[CompType().getID()];
+                std::vector<std::shared_ptr<CompType>> finalList;
+                std::cout << "\n!" << CompType().getID();
+                auto list = _components[CompType().getID()];
+                for(const auto& i : list){
+                    finalList.push_back(std::dynamic_pointer_cast<CompType>(i));
+
+                }
+                return finalList;
             }
+
+
+            // template <typename CompType>
+            // std::vector<std::shared_ptr<CompType>> getComponents2DList(){
+            //     auto list = getComponentsList<CompType>();
+            // }
+            // template <typename CompType1, typename CompType2>
+            // void getComponents2DList(std::vector<std::vector<std::shared_ptr<Component>>>& list, int placement = 0){
+            //     //list[placement++].push_back(getComponentsList<CompType1>());
+            //     //list[placement++].push_back(getComponentsList<CompType2>());
+            // }
+
 
     };
 
