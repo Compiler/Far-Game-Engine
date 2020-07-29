@@ -8,6 +8,7 @@ namespace far{
     DEFINE_COMPONENT(TransformComponent)
 
         glm::vec3 position;
+        glm::vec3 size;
 
     };
 
