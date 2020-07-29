@@ -4,7 +4,7 @@
 #include <unordered_map>
 #include <memory>
 #include <EntityComponentSystem/Components/Component.h>
-
+#include <iostream>
 namespace far{
     typedef uint64_t Entity;
     class EntityManager{
@@ -20,9 +20,10 @@ namespace far{
 
             Entity createEntity(){
                 Entity entity = _ENTITY_COUNT++;
+                std::cout << "Entity #" << entity << " created!\n";
                 _ecsMap[entity] = std::unordered_map<ComponentID, std::shared_ptr<Component>>();
                 _entities.push_back(entity);
-
+                return entity;
             }
             
             std::unordered_map<Entity, std::unordered_map<ComponentID, std::shared_ptr<Component>>> getECSMap(){return _ecsMap;};

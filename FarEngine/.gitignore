@@ -2,3 +2,4 @@
 settings.json
 
 /bin/libstdc++-6.dll
+/bin/*.o
