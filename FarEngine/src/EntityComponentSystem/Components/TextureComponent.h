@@ -4,13 +4,11 @@
 
 namespace far{
 
-struct TextureComponent : public Component{
-    
-    ComponentID getID()override{return 2;}
+    DEFINE_COMPONENT(TextureComponent)    
 
-    const char* fileName;
+        const char* fileName;
 
-};
+    };
 
 
 }
