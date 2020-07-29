@@ -24,6 +24,8 @@ namespace far{
                 _entities.push_back(entity);
 
             }
+            
+            std::unordered_map<Entity, std::unordered_map<ComponentID, std::shared_ptr<Component>>> getECSMap(){return _ecsMap;};
 
             template <typename CompType>
             void addComponent(Entity ent, std::shared_ptr<CompType> comp){

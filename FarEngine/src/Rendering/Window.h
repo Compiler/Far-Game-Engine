@@ -7,7 +7,6 @@ namespace far{
 
     class Window{
 
-
         private:
             std::string _windowName;
             GLFWwindow* _window;

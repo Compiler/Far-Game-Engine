@@ -11,6 +11,7 @@
 #include <EntityComponentSystem/Components/TransformComponent.h>
 #include <EntityComponentSystem/Components/TextureComponent.h>
 #include <EntityComponentSystem/Components/Component.h>
+#include <Rendering/Renderers/BatchRenderer2D.h>
 
 namespace far{
 
@@ -20,13 +21,17 @@ namespace far{
             far::Window* _windowRef;
             glm::vec3 thing;
 
-            std::unique_ptr<EntityManager> _entityManager;
-            
+            std::unique_ptr<far::EntityManager> _entityManager;
+            far::BatchRenderer2D _batchRenderer;
+
         public:
 
             void initForPep(){
-                _entityManager = std::make_unique<EntityManager>();
+
+                _batchRenderer = far::BatchRenderer2D();
+                _entityManager = std::make_unique<far::EntityManager>();
                 far::Entity entity1 = _entityManager->createEntity();
+                std::cout << entity1 << std::endl;
                 std::shared_ptr<far::TransformComponent> trans = std::make_shared<TransformComponent>();
                 std::shared_ptr<far::TextureComponent> tex = std::make_shared<TextureComponent>();
                 tex->fileName = "SomeTexture.png";
@@ -34,16 +39,16 @@ namespace far{
                 _entityManager->addComponent(entity1, trans, tex);
                 std::shared_ptr<far::TransformComponent> type = _entityManager->getComponent<TransformComponent>(entity1);
                 std::shared_ptr<far::TextureComponent> texRet = _entityManager->getComponent<TextureComponent>(entity1);
-                std::cout << type->position.x << "\n"; //ec works, now we need to make the s in ecs work
-                std::cout << texRet->fileName << "\n"; 
+                std::cout << type->position.x << "\n";
+                std::cout << texRet->fileName << "\n";
+                _batchRenderer.submit(*_entityManager);
+
             }
 
             void load();
             void update();
             void render();
             void unload();
-            
-
             const bool isRunning()const{return !glfwWindowShouldClose(_windowRef->getWindow());}
 
         //tmp

@@ -15,9 +15,6 @@ namespace far{
     struct Component{
         const char* name = "Component";
         virtual ComponentID getID() = 0;
-
-
-
     };
 
 }
