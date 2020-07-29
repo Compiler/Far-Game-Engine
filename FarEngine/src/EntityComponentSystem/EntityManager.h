@@ -24,15 +24,16 @@ namespace far{
 
             }
 
-            template<typename T>
-			void attachComponent(Entity entity, std::shared_ptr<T> component){
-            }
-            void addComponent(Entity ent, std::shared_ptr<Component> comp){
+            template <typename CompType>
+            void addComponent(Entity ent, std::shared_ptr<CompType> comp){
                 _ecsMap[ent][comp->getID()] = comp;
             }
 
-            std::shared_ptr<Component> getComponent(Entity ent, ComponentID comp){
-                    return _ecsMap[ent][comp];
+
+            template <typename CompType>
+            std::shared_ptr<CompType> getComponent(Entity ent){
+                CompType comp;
+				return std::dynamic_pointer_cast<CompType>(_ecsMap[ent][comp.getID()]);
             }
 
     };

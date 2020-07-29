@@ -30,7 +30,7 @@ LINKS = -lglfw3 -lglu32 -lopengl32 -lgdi32
 
 
 OBJECTS = $(OUT_DIR)/TextLoader.o $(OUT_DIR)/StartupSystems.o $(OUT_DIR)/Window.o\
- $(OUT_DIR)/FarCore.o  $(OUT_DIR)/EntityManager.o 
+ $(OUT_DIR)/FarCore.o  $(OUT_DIR)/EntityManager.o $(OUT_DIR)/HashImplementation.o
 all: main
 
 main: $(ENTRY_POINT) FarCore.o
@@ -38,7 +38,7 @@ main: $(ENTRY_POINT) FarCore.o
 
 
 ALL_SETTINGS = $(CXX) $(CXXFLAGS) $(LIBS) $(INC) $(INC_INTERNAL)
-FarCore.o: $(SRC_DIR)/FarCore.cpp StartupSystems.o TextLoader.o Window.o EntityManager.o 
+FarCore.o: $(SRC_DIR)/FarCore.cpp StartupSystems.o TextLoader.o Window.o EntityManager.o  HashImplementation.o
 	$(ALL_SETTINGS) -c $(SRC_DIR)/FarCore.cpp -o $(OUT_DIR)/FarCore.o
 
 StartupSystems.o: $(SRC_DIR)/Startup/StartupSystems.cpp
@@ -56,7 +56,8 @@ Logger.o: $(SRC_DIR)/Tools/Logging/Logger.cpp
 EntityManager.o: $(SRC_DIR)/EntityComponentSystem/EntityManager.cpp
 	$(ALL_SETTINGS) -c $(SRC_DIR)/EntityComponentSystem/EntityManager.cpp -o $(OUT_DIR)/EntityManager.o
 
-
+HashImplementation.o:$(SRC_DIR)/EntityComponentSystem/Components/HashImplementation.cpp
+	$(ALL_SETTINGS) -c $(SRC_DIR)/EntityComponentSystem/Components/HashImplementation.cpp -o $(OUT_DIR)/HashImplementation.o
 
 
 

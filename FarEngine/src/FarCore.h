@@ -29,7 +29,7 @@ namespace far{
                 std::shared_ptr<far::TransformComponent> trans = std::make_shared<TransformComponent>();
                 trans->position = glm::vec3(2,4,5);
                 _entityManager->addComponent(entity1, trans);
-                _entityManager->getComponent(entity1, trans->getID());
+                std::shared_ptr<far::TransformComponent> type = _entityManager->getComponent<TransformComponent>(entity1);
 
             }
 
