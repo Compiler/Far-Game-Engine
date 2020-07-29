@@ -51,6 +51,11 @@ namespace far{
 				return std::dynamic_pointer_cast<CompType>(_ecsMap[ent][CompType().getID()]);
             }
 
+            template <typename CompType>
+            std::vector<std::shared_ptr<CompType>> getComponentsList(){
+                return _components[CompType().getID()];
+            }
+
     };
 
 }
