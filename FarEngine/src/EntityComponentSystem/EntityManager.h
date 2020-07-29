@@ -11,6 +11,7 @@ namespace far{
         private:
             static uint64_t _ENTITY_COUNT;
             std::vector<Entity> _entities;
+            std::unordered_map<ComponentID, std::vector<std::shared_ptr<Component>>> _components;
             std::vector<ComponentID> _componentIDs;
             std::unordered_map<Entity, std::unordered_map<ComponentID, std::shared_ptr<Component>>> _ecsMap;
 
@@ -26,9 +27,24 @@ namespace far{
 
             template <typename CompType>
             void addComponent(Entity ent, std::shared_ptr<CompType> comp){
-                _ecsMap[ent][comp->getID()] = comp;
+                auto id = comp->getID();
+                _ecsMap[ent][id] = comp;
+                if(_components.find(id) != _components.end() ){
+                    _components[id].push_back(comp);
+                }//else _components[id] = std::vector<std::shared_ptr<Component>>();
+
             }
 
+            template <typename CompType, typename... Types>
+            void addComponent(Entity ent, std::shared_ptr<CompType> comp, std::shared_ptr<Types> ... types){
+                auto id = comp->getID();
+                _ecsMap[ent][id] = comp;
+                if(_components.find(id) != _components.end() ){
+                    _components[id].push_back(comp);
+                }//else _components[id] = std::vector<std::shared_ptr<Component>>();
+
+                addComponent(ent, types...);
+            }
 
             template <typename CompType>
             std::shared_ptr<CompType> getComponent(Entity ent){
