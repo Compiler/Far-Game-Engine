@@ -23,7 +23,7 @@ SPDLOG_SRC = $(SPDLOG_ROOT)src
 GLM_ROOT = outsourced/glm/
 
 INC_INTERNAL = -I $(SRC_DIR) 
-INC=-I $(SRC_DIR)/ -I $(GLAD_INC) -I $(GLFW_INC) -I $(SPDLOG_INC) -I $(GLM_ROOT)
+INC=-I $(SRC_DIR)/ -I $(GLAD_INC) -I $(GLFW_INC) -I $(GLM_ROOT)
 LIBS = -L $(GLFW_LIB)
 LINKS = -lglfw3 -lglu32 -lopengl32 -lgdi32
 
