@@ -104,7 +104,7 @@ namespace far{
 		
 		}
 		else{
-		    std::cout << "Failed to load texture" << std::endl;
+		    FAR_ERROR("Failed to load texture");;
 		}
 		glBindTextureUnit(0, texture);
 		FileLoaderFactory::free(data);

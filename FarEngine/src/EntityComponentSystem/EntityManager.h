@@ -5,6 +5,7 @@
 #include <memory>
 #include <EntityComponentSystem/Components/Component.h>
 #include <iostream>
+#include <Tools/Logging/TmpLog.h>
 namespace far{
     typedef uint64_t Entity;
     class EntityManager{
@@ -23,7 +24,7 @@ namespace far{
 
             Entity createEntity(){
                 Entity entity = _ENTITY_COUNT++;
-                std::cout << "Entity #" << entity << " created!\n";
+                FAR_DEBUG("Entity #" << entity << " created!");
                 _ecsMap[entity] = std::unordered_map<ComponentID, std::shared_ptr<Component>>();
                 _entities.push_back(entity);
                 return entity;
@@ -34,8 +35,8 @@ namespace far{
             template <typename CompType>
             void addComponent(Entity ent, std::shared_ptr<CompType> comp){
                 auto id = comp->getID();
-                std::cout << "'addComponent<type>'\n\tCompType id: \t" << CompType().name << " added to entity #" << ent << "\n";
-
+               auto name = CompType().name;
+               FAR_LOG("'addComponent<type>'\n\tCompType id: \t" << CompType().name << " added to entity #" << ent);
                 _ecsMap[ent][id] = comp;
                 if(_components.find(id) == _components.end() ){
                     _components[id].push_back(comp);
@@ -46,8 +47,7 @@ namespace far{
             template <typename CompType, typename... Types>
             void addComponent(Entity ent, std::shared_ptr<CompType> comp, std::shared_ptr<Types> ... types){
                 auto id = comp->getID();
-                std::cout << "'addComponent<type, types...>'\n\tCompType id: \t" << CompType().name << " added to entity #" << ent <<  "\n";
-                
+                 FAR_LOG("'addComponent<type>'\n\tCompType id: \t" << CompType().name << " added to entity #" << ent);
                 _ecsMap[ent][id] = comp;
                 if(_components.find(id) == _components.end() ){
                     _components[id].push_back(comp);
@@ -64,7 +64,7 @@ namespace far{
             template <typename CompType>
             std::vector<std::shared_ptr<CompType>> getComponentsList(){
                 std::vector<std::shared_ptr<CompType>> finalList;
-                std::cout << "'getComponentsList'\n\tCompType id: \t" << CompType().name << "\n";
+                FAR_LOG("'getComponentsList'\n\tCompType id: \t" << CompType().name);
                 auto baseList = _components[CompType().getID()];
                 std::cout << "\tBase list size: " << baseList.size() << "\n";
                 

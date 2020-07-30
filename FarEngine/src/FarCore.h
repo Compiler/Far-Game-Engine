@@ -34,9 +34,6 @@ namespace far{
         public:
 
             void initForPep(){
-                //std::cout << ANSI_COLOR_BOLD_RED << "\nhi";
-                //printf(ANSI_COLOR_BOLD_RED);
-                FAR_LOG("Sup bro");
                 _batchRenderer = far::BatchRenderer2D();
                 _entityManager = std::make_shared<far::EntityManager>();
                 far::Entity entity1 = _entityManager->createEntity();
