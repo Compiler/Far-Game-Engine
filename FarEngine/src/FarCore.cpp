@@ -12,7 +12,7 @@ namespace far{
         _windowRef = new Window(1080, 720, "Far Game Engine", false);
         StartupSystems::_initGlad();
         init();
-        glViewport(0, 0, 640, 480);
+        //glViewport(0, 0, 640, 480); //oopsxd
 
 
 
