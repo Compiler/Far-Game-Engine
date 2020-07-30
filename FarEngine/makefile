@@ -1,5 +1,6 @@
 CXX = g++ 
-CXXFLAGS = -std=c++17 -Wall -w -g
+C++_VERSION = c++17
+CXXFLAGS = -std=$(C++_VERSION) -Wall -w -g
 
 OUT_DIR = bin
 LAUNCHER_NAME = Far
