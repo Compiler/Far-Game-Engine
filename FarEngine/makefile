@@ -31,7 +31,7 @@ LINKS = -lglfw3 -lglu32 -lopengl32 -lgdi32
 
 
 
-OBJECTS = $(OUT_DIR)/TextLoader.o $(OUT_DIR)/StartupSystems.o $(OUT_DIR)/Window.o\
+OBJECTS = $(OUT_DIR)/FileLoaderFactory.o $(OUT_DIR)/StartupSystems.o $(OUT_DIR)/Window.o\
  $(OUT_DIR)/FarCore.o  $(OUT_DIR)/EntityManager.o $(OUT_DIR)/HashImplementation.o\
  $(OUT_DIR)/BatchRenderer2D.o  $(OUT_DIR)/InputManager.o
 all: main

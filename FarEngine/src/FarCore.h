@@ -13,6 +13,8 @@
 #include <EntityComponentSystem/Components/Component.h>
 #include <Rendering/Renderers/BatchRenderer2D.h>
 
+#include <Tools/Files/FileLoaderFactory.h>
+
 namespace far{
 
     class FarCore{
@@ -23,6 +25,8 @@ namespace far{
 
             std::shared_ptr<far::EntityManager> _entityManager;
             far::BatchRenderer2D _batchRenderer;
+	        
+            
 
         public:
 
@@ -48,14 +52,30 @@ namespace far{
                 _entityManager->addComponent(entity3, rend);
                 _entityManager->addComponent(entity3, tex);
                 _entityManager->addComponent(entity3, trans);
-                std::shared_ptr<far::TransformComponent> type = _entityManager->getComponent<TransformComponent>(entity1);
-                std::shared_ptr<far::TextureComponent> texRet = _entityManager->getComponent<TextureComponent>(entity1);
-                std::cout << type->position.x << "\n";
-                std::cout << texRet->fileName << "\n";
-
 
                 _batchRenderer.submit(_entityManager);
 
+
+
+                int width, height, nrChannels;
+                unsigned char* data = FileLoaderFactory::loadImage(FAR_INTERNAL_TEXTURE("wall.jpg"), &width, &height, &nrChannels);
+               //unsigned int texture;
+               //glGenTextures(1, &texture);  
+               //glBindTexture(GL_TEXTURE_2D, texture);
+               //glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);	
+               //glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+               //glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+               //glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);  
+
+               //if (data){
+               //    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+               //    glGenerateMipmap(GL_TEXTURE_2D);
+               //
+               //}
+               //else{
+               //    std::cout << "Failed to load texture" << std::endl;
+               //}
+               //FileLoaderFactory::free(data);
             }
 
             void load();
@@ -66,7 +86,9 @@ namespace far{
 
         //tmp
         private:
-            uint16_t shaderProgram, arrayID;
+            unsigned int shaderProgram;
+            unsigned int bufferID, arrayID;
+
             double startFrameTime, deltaTime, lastFrameTime, elapsedTime, frames;
 
             void init();

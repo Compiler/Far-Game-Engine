@@ -1,7 +1,7 @@
 #include "FileLoaderFactory.h"
 #define STB_IMAGE_IMPLEMENTATION
 #include <stb_image.h>
-namespace far {
+namespace far { namespace FileLoaderFactory{
 
 
     void loadTextFromFile(const char fileName[], std::string& dst){
@@ -15,4 +15,4 @@ namespace far {
 	}
 
 	void free(void* data) { stbi_image_free(data); }
-}
+}}

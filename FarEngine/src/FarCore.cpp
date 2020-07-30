@@ -14,6 +14,14 @@ namespace far{
         init();
         glViewport(0, 0, 640, 480);
 
+
+
+
+
+		
+
+
+
     }
     void FarCore::update(){
 		glfwPollEvents();
@@ -54,7 +62,7 @@ namespace far{
 	loadShaders("src/Resources/Shaders/pass.vert", "src/Resources/Shaders/RayMarching.frag");
 	glUseProgram(shaderProgram);
 
-	float sz = 1.f;
+	float sz = 0.7f;
 	float vertices[7 * 6] = {
 		-sz, -sz, 0.0f, 	1.0f, 1.0f, 1.0f, 1.0f, // bottom left
 		-sz,  sz, 0.0f,	1.0f, 1.0f, 1.0f, 1.0f, // top left
@@ -64,7 +72,6 @@ namespace far{
 		-sz,  sz, 0.0f,	0.0f, 1.0f, 1.0f, 1.0f,
 		 sz, -sz, 0.0f, 	0.0f, 1.0f, 1.0f, 1.0f	 };
 	
-	unsigned int bufferID, arrayID;
 	glGenVertexArrays(1, &arrayID);
 	glBindVertexArray(arrayID);
 	
@@ -83,8 +90,8 @@ void FarCore::loadShaders(const char* vertexFile, const char* fragmentFile){
 	unsigned int vertexShader, fragmentShader;
 
 	std::string vertSrc, fragSrc;
-	far::loadTextFromFile(vertexFile, vertSrc);
-	far::loadTextFromFile(fragmentFile, fragSrc);
+	far::FileLoaderFactory::loadTextFromFile(vertexFile, vertSrc);
+	far::FileLoaderFactory::loadTextFromFile(fragmentFile, fragSrc);
 	const char* vert = vertSrc.c_str();
 	const char* frag = fragSrc.c_str();
 	vertexShader = glCreateShader(GL_VERTEX_SHADER);
