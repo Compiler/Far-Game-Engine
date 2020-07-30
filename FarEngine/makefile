@@ -1,6 +1,6 @@
 CXX = g++ 
-C++_VERSION = c++17
-CXXFLAGS = -std=$(C++_VERSION) -Wall -w -g
+C++_VERSION = c++0x
+CXXFLAGS = -std=$(C++_VERSION) -Wall -w -g 
 
 OUT_DIR = bin
 LAUNCHER_NAME = Far
@@ -22,11 +22,12 @@ SPDLOG_INC = $(SPDLOG_ROOT)include
 SPDLOG_SRC = $(SPDLOG_ROOT)src
 
 STBIMAGE_ROOT = outsourced/stbimage
+LOGURU_ROOT = outsourced/loguru
 
 GLM_ROOT = outsourced/glm/
 
 INC_INTERNAL = -I $(SRC_DIR) 
-INC=-I $(SRC_DIR)/ -I $(GLAD_INC) -I $(GLFW_INC) -I $(GLM_ROOT) -I $(STBIMAGE_ROOT)
+INC=-I $(SRC_DIR)/ -I $(GLAD_INC) -I $(GLFW_INC) -I $(GLM_ROOT) -I $(STBIMAGE_ROOT) -I $(SPDLOG_INC)
 LIBS = -L $(GLFW_LIB)
 LINKS = -lglfw3 -lglu32 -lopengl32 -lgdi32
 

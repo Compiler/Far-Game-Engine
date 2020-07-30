@@ -15,6 +15,9 @@
 
 #include <Tools/Files/FileLoaderFactory.h>
 
+
+
+
 namespace far{
 
     class FarCore{
@@ -31,6 +34,7 @@ namespace far{
         public:
 
             void initForPep(){
+
 
                 _batchRenderer = far::BatchRenderer2D();
                 _entityManager = std::make_shared<far::EntityManager>();

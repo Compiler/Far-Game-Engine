@@ -1,15 +1,22 @@
-#include <FarCore.h>
+//#include <FarCore.h>
+#include <spdlog/spdlog.h>
+#include <spdlog/sinks/basic_file_sink.h>
+
+int main(int argc, char* argv[]){
 
 
-int main(){
+	spdlog::info("Test 1");
 
-	far::FarCore* core = new far::FarCore();
-	core->load();
-	while(core->isRunning()){
-		core->update();
-		core->render();
-	}
-	core->unload();
+	return 3;
+	//far::FarCore* core = new far::FarCore();
+//
+//
+	//core->load();
+	//while(core->isRunning()){
+	//	core->update();
+	//	core->render();
+	//}
+	//core->unload();
 	
 }
 
