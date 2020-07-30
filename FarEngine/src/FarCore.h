@@ -3,7 +3,7 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <Rendering/Window.h>
-#include <Tools/Files/TextLoader.h>
+#include <Tools/Files/FileLoaderFactory.h>
 #include <Startup/StartupSystems.h>
 #include <glm/vec3.hpp>
 #include <iostream>

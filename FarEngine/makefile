@@ -20,10 +20,12 @@ SPDLOG_ROOT = outsourced/spdlog/
 SPDLOG_INC = $(SPDLOG_ROOT)include
 SPDLOG_SRC = $(SPDLOG_ROOT)src
 
+STBIMAGE_ROOT = outsourced/stbimage
+
 GLM_ROOT = outsourced/glm/
 
 INC_INTERNAL = -I $(SRC_DIR) 
-INC=-I $(SRC_DIR)/ -I $(GLAD_INC) -I $(GLFW_INC) -I $(GLM_ROOT)
+INC=-I $(SRC_DIR)/ -I $(GLAD_INC) -I $(GLFW_INC) -I $(GLM_ROOT) -I $(STBIMAGE_ROOT)
 LIBS = -L $(GLFW_LIB)
 LINKS = -lglfw3 -lglu32 -lopengl32 -lgdi32
 
@@ -39,14 +41,14 @@ main: $(ENTRY_POINT) FarCore.o
 
 
 ALL_SETTINGS = $(CXX) $(CXXFLAGS) $(LIBS) $(INC) $(INC_INTERNAL)
-FarCore.o: $(SRC_DIR)/FarCore.cpp StartupSystems.o TextLoader.o Window.o EntityManager.o HashImplementation.o BatchRenderer2D.o InputManager.o
+FarCore.o: $(SRC_DIR)/FarCore.cpp StartupSystems.o FileLoaderFactory.o Window.o EntityManager.o HashImplementation.o BatchRenderer2D.o InputManager.o
 	$(ALL_SETTINGS) -c $(SRC_DIR)/FarCore.cpp -o $(OUT_DIR)/FarCore.o
 
 StartupSystems.o: $(SRC_DIR)/Startup/StartupSystems.cpp
 	$(ALL_SETTINGS) -c $(SRC_DIR)/Startup/StartupSystems.cpp -o $(OUT_DIR)/StartupSystems.o
 
-TextLoader.o: $(SRC_DIR)/Tools/Files/TextLoader.cpp
-	$(ALL_SETTINGS) -c $(SRC_DIR)/Tools/Files/TextLoader.cpp -o $(OUT_DIR)/TextLoader.o
+FileLoaderFactory.o: $(SRC_DIR)/Tools/Files/FileLoaderFactory.cpp
+	$(ALL_SETTINGS) -c $(SRC_DIR)/Tools/Files/FileLoaderFactory.cpp -o $(OUT_DIR)/FileLoaderFactory.o
 
 Window.o: $(SRC_DIR)/Rendering/Window.cpp
 	$(ALL_SETTINGS) -c $(SRC_DIR)/Rendering/Window.cpp -o $(OUT_DIR)/Window.o
