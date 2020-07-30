@@ -62,7 +62,7 @@ namespace far{
 	loadShaders("src/Resources/Shaders/pass.vert", "src/Resources/Shaders/RayMarching.frag");
 	glUseProgram(shaderProgram);
 
-	float sz = 0.7f;
+	float sz = 1.0f;
 	float vertices[7 * 6] = {
 		-sz, -sz, 0.0f, 	1.0f, 1.0f, 1.0f, 1.0f, // bottom left
 		-sz,  sz, 0.0f,	1.0f, 1.0f, 1.0f, 1.0f, // top left
