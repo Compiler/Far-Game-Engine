@@ -12,8 +12,6 @@ namespace far{
         _windowRef = new Window(1080, 720, "Far Game Engine", false);
         StartupSystems::_initGlad();
         init();
-        thing = glm::vec3(1,2,3);
-        std::cout << thing.x << " is dope\n";
         glViewport(0, 0, 640, 480);
 
     }

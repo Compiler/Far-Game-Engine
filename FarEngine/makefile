@@ -1,5 +1,5 @@
-CXX = g++
-CXXFLAGS = -Wall -w -g
+CXX = g++ 
+CXXFLAGS = -std=c++17 -Wall -w -g
 
 OUT_DIR = bin
 LAUNCHER_NAME = Far
@@ -65,6 +65,9 @@ BatchRenderer2D.o: $(SRC_DIR)/Rendering/Renderers/BatchRenderer2D.cpp
 
 InputManager.o: $(SRC_DIR)/Tools/Input/InputManager.cpp
 	$(ALL_SETTINGS) -c $(SRC_DIR)/Tools/Input/InputManager.cpp -o $(OUT_DIR)/InputManager.o
+
+Logger.o: $(SRC_DIR)/Tools/Logging/Logger.cpp
+	$(ALL_SETTINGS) -c $(SRC_DIR)/Tools/Logging/Logger.cpp -o $(OUT_DIR)/Logger.o
 
 
 run: $(OUT_DIR)/$(LAUNCHER_NAME).exe
