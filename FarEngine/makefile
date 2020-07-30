@@ -31,7 +31,7 @@ LINKS = -lglfw3 -lglu32 -lopengl32 -lgdi32
 
 OBJECTS = $(OUT_DIR)/TextLoader.o $(OUT_DIR)/StartupSystems.o $(OUT_DIR)/Window.o\
  $(OUT_DIR)/FarCore.o  $(OUT_DIR)/EntityManager.o $(OUT_DIR)/HashImplementation.o\
- $(OUT_DIR)/BatchRenderer2D.o
+ $(OUT_DIR)/BatchRenderer2D.o  $(OUT_DIR)/InputManager.o
 all: main
 
 main: $(ENTRY_POINT) FarCore.o
@@ -39,7 +39,7 @@ main: $(ENTRY_POINT) FarCore.o
 
 
 ALL_SETTINGS = $(CXX) $(CXXFLAGS) $(LIBS) $(INC) $(INC_INTERNAL)
-FarCore.o: $(SRC_DIR)/FarCore.cpp StartupSystems.o TextLoader.o Window.o EntityManager.o  HashImplementation.o BatchRenderer2D.o
+FarCore.o: $(SRC_DIR)/FarCore.cpp StartupSystems.o TextLoader.o Window.o EntityManager.o HashImplementation.o BatchRenderer2D.o InputManager.o
 	$(ALL_SETTINGS) -c $(SRC_DIR)/FarCore.cpp -o $(OUT_DIR)/FarCore.o
 
 StartupSystems.o: $(SRC_DIR)/Startup/StartupSystems.cpp
@@ -62,6 +62,10 @@ HashImplementation.o: $(SRC_DIR)/EntityComponentSystem/Components/HashImplementa
 
 BatchRenderer2D.o: $(SRC_DIR)/Rendering/Renderers/BatchRenderer2D.cpp
 	$(ALL_SETTINGS) -c $(SRC_DIR)/Rendering/Renderers/BatchRenderer2D.cpp -o $(OUT_DIR)/BatchRenderer2D.o
+
+InputManager.o: $(SRC_DIR)/Tools/Input/InputManager.cpp
+	$(ALL_SETTINGS) -c $(SRC_DIR)/Tools/Input/InputManager.cpp -o $(OUT_DIR)/InputManager.o
+
 
 run: $(OUT_DIR)/$(LAUNCHER_NAME).exe
 	./$(OUT_DIR)/$(LAUNCHER_NAME).exe
