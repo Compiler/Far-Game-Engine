@@ -65,13 +65,13 @@ namespace far{
 
 		float sz = 3.0f / 4.0f;
 		float vertices[9 * 6] = {
-			-sz, -sz, 0.0f, 	1.0f, 1.0f, 1.0f, 1.0f, 		0,0, // bottom left
-			-sz,  sz, 0.0f,		1.0f, 1.0f, 1.0f, 1.0f, 		0,1, // top left
-			sz, -sz, 0.0f, 		1.0f, 1.0f, 1.0f, 1.0f, 		1,0,// bottom right
-
-			sz,  sz, 0.0f, 		1.0f, 1.0f, 1.0f, 1.0f, 		1,1,//top right
-			-sz,  sz, 0.0f,		1.0f, 1.0f, 1.0f, 1.0f, 		0,1,// top left
-			sz, -sz, 0.0f, 		1.0f, 1.0f, 1.0f, 1.0f, 		1,0};// bottom right };
+			-sz, -sz, 0.0f, 	1.0f, 0.0f, 1.0f, 1.0f, 		0.0f,0.0f, // bottom left
+			-sz,  sz, 0.0f,		1.0f, 0.0f, 1.0f, 1.0f, 		0.0f,1.0f, // top left
+			sz, -sz, 0.0f, 		1.0f, 0.0f, 1.0f, 1.0f, 		1.0f,0.0f,// bottom right
+			
+			sz,  sz, 0.0f, 		1.0f, 0.0f, 1.0f, 1.0f, 		1.0f,1.0f,//top right
+			-sz,  sz, 0.0f,		1.0f, 0.0f, 1.0f, 1.0f, 		0.0f,1.0f,// top left
+			sz, -sz, 0.0f, 		1.0f, 0.0f, 1.0f, 1.0f, 		1.0f,0.0f};// bottom right };
 
 		glGenVertexArrays(1, &arrayID);
 		glBindVertexArray(arrayID);
@@ -81,10 +81,12 @@ namespace far{
 		glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
 
-		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 7 * sizeof(float), (const void*)0);///xyz
+		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 9 * sizeof(float), (const void*)0);///xyz
 		glEnableVertexAttribArray(0);
-		glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, 7 * sizeof(float), (const void*)(3 * sizeof(float)));
+		glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, 9 * sizeof(float), (const void*)(3 * sizeof(float)));
 		glEnableVertexAttribArray(1);
+		glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 9 * sizeof(float), (const void*)(7 * sizeof(float)));
+		glEnableVertexAttribArray(2);
 
 
 		int width, height, nrChannels, option;
@@ -106,7 +108,7 @@ namespace far{
 		else{
 		    FAR_ERROR("Failed to load texture");;
 		}
-		glBindTextureUnit(0, texture);
+		glBindTextureUnit(1, texture);
 		FileLoaderFactory::free(data);
 
 	}
