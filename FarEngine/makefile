@@ -1,5 +1,5 @@
 CXX = g++ 
-C++_VERSION = c++0x
+C++_VERSION = c++17
 CXXFLAGS = -std=$(C++_VERSION) -Wall -w -g 
 
 OUT_DIR = bin
@@ -77,6 +77,9 @@ Logger.o: $(SRC_DIR)/Tools/Logging/Logger.cpp
 run: $(OUT_DIR)/$(LAUNCHER_NAME).exe
 	./$(OUT_DIR)/$(LAUNCHER_NAME).exe
 
+launch:
+	make
+	make run
 
 
 fetch:
