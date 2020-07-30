@@ -71,7 +71,7 @@ InputManager.o: $(SRC_DIR)/Tools/Input/InputManager.cpp
 	$(ALL_SETTINGS) -c $(SRC_DIR)/Tools/Input/InputManager.cpp -o $(OUT_DIR)/InputManager.o
 
 Logger.o: $(SRC_DIR)/Tools/Logging/Logger.cpp
-	$(ALL_SETTINGS) -c $(SRC_DIR)/Tools/Logging/Logger.cpp -o $(OUT_DIR)/Logger.o
+	$(ALL_SETTINGS) -c $(SRC_DIR)/Tools/Logging/Logger.cpp -o $(OUT_DIR)/Logger.o  
 
 
 run: $(OUT_DIR)/$(LAUNCHER_NAME).exe

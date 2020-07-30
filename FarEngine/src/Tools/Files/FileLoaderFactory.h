@@ -3,10 +3,10 @@
 #include <fstream>
 #include <streambuf>
 
-#define FAR_INTERNAL(x)         "src/resources/" x
-#define FAR_INTERNAL_SHADER(x)  FAR_INTERNAL("shaders/") x
-#define FAR_INTERNAL_TEXTURE(x) FAR_INTERNAL("textures/") x
-#define FAR_INTERNAL_MODEL(x)   FAR_INTERNAL("models/") x
+#define FAR_INTERNAL(x)         "src/Resources/" x
+#define FAR_INTERNAL_SHADER(x)  FAR_INTERNAL("Shaders/") x
+#define FAR_INTERNAL_TEXTURE(x) FAR_INTERNAL("Textures/") x
+#define FAR_INTERNAL_MODEL(x)   FAR_INTERNAL("Models/") x
 
 
 namespace far {

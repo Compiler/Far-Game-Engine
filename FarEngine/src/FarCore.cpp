@@ -38,10 +38,10 @@ namespace far{
 
     void FarCore::render(){
 		glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
-        glClearColor(0.9, 0.4, 0.2, 1.0);
+        glClearColor(0.2, 0.2, 0.4, 1.0);
 		glUseProgram(shaderProgram);
-		int loc = glGetUniformLocation(shaderProgram, "time");
-		glUniform1f(loc, glfwGetTime());
+		static int loc = glGetUniformLocation(shaderProgram, "u_texture");
+		glUniform1f(loc, 0);
 		glBindVertexArray(arrayID);
 		glDrawArrays(GL_TRIANGLES, 0, 6);
 		glfwSwapBuffers(_windowRef->getWindow());
@@ -57,36 +57,59 @@ namespace far{
 
 
 
- void FarCore::init(){
-    int index = 0;
+	void FarCore::init(){
+		int index = 0;
 
-	loadShaders("src/Resources/Shaders/pass.vert", "src/Resources/Shaders/pass.frag");
-	glUseProgram(shaderProgram);
+		loadShaders("src/Resources/Shaders/pass.vert", "src/Resources/Shaders/pass.frag");
+		glUseProgram(shaderProgram);
 
-	float sz = 3.0f / 4.0f;
-	float vertices[7 * 6] = {
-		-sz, -sz, 0.0f, 	1.0f, 1.0f, 1.0f, 1.0f, // bottom left
-		-sz,  sz, 0.0f,	1.0f, 1.0f, 1.0f, 1.0f, // top left
-		 sz, -sz, 0.0f, 	1.0f, 1.0f, 1.0f, 1.0f, // bottom right
+		float sz = 3.0f / 4.0f;
+		float vertices[9 * 6] = {
+			-sz, -sz, 0.0f, 	1.0f, 1.0f, 1.0f, 1.0f, 		0,0, // bottom left
+			-sz,  sz, 0.0f,		1.0f, 1.0f, 1.0f, 1.0f, 		0,1, // top left
+			sz, -sz, 0.0f, 		1.0f, 1.0f, 1.0f, 1.0f, 		1,0,// bottom right
 
-		 sz,  sz, 0.0f, 	0.0f, 1.0f, 1.0f, 1.0f, //top right
-		-sz,  sz, 0.0f,	0.0f, 1.0f, 1.0f, 1.0f,
-		 sz, -sz, 0.0f, 	0.0f, 1.0f, 1.0f, 1.0f	 };
-	
-	glGenVertexArrays(1, &arrayID);
-	glBindVertexArray(arrayID);
-	
-	glGenBuffers(1, &bufferID);
-	glBindBuffer(GL_ARRAY_BUFFER, bufferID);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+			sz,  sz, 0.0f, 		1.0f, 1.0f, 1.0f, 1.0f, 		1,1,//top right
+			-sz,  sz, 0.0f,		1.0f, 1.0f, 1.0f, 1.0f, 		0,1,// top left
+			sz, -sz, 0.0f, 		1.0f, 1.0f, 1.0f, 1.0f, 		1,0};// bottom right };
+
+		glGenVertexArrays(1, &arrayID);
+		glBindVertexArray(arrayID);
+		
+		glGenBuffers(1, &bufferID);
+		glBindBuffer(GL_ARRAY_BUFFER, bufferID);
+		glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
 
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 7 * sizeof(float), (const void*)0);///xyz
-	glEnableVertexAttribArray(0);
-	glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, 7 * sizeof(float), (const void*)(3 * sizeof(float)));
-	glEnableVertexAttribArray(1);
+		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 7 * sizeof(float), (const void*)0);///xyz
+		glEnableVertexAttribArray(0);
+		glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, 7 * sizeof(float), (const void*)(3 * sizeof(float)));
+		glEnableVertexAttribArray(1);
 
-    }
+
+		int width, height, nrChannels, option;
+		option = 3;
+		unsigned char* data = FileLoaderFactory::loadImage(FAR_INTERNAL_TEXTURE("wall.jpg"), &width, &height, &nrChannels, 3);
+		unsigned int texture;
+		glGenTextures(1, &texture);  
+		glBindTexture(GL_TEXTURE_2D, texture);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);	
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);  
+
+		if (data){
+		    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB + (option - 3), width, height, 0, GL_RGB + (option - 3), GL_UNSIGNED_BYTE, data);
+		    glGenerateMipmap(GL_TEXTURE_2D);
+		
+		}
+		else{
+		    std::cout << "Failed to load texture" << std::endl;
+		}
+		glBindTextureUnit(0, texture);
+		FileLoaderFactory::free(data);
+
+	}
 void FarCore::loadShaders(const char* vertexFile, const char* fragmentFile){
 	unsigned int vertexShader, fragmentShader;
 
