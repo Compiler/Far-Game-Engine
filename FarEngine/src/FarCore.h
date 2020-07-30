@@ -21,7 +21,7 @@ namespace far{
             far::Window* _windowRef;
             glm::vec3 thing;
 
-            std::unique_ptr<far::EntityManager> _entityManager;
+            std::shared_ptr<far::EntityManager> _entityManager;
             far::BatchRenderer2D _batchRenderer;
 
         public:
@@ -29,19 +29,32 @@ namespace far{
             void initForPep(){
 
                 _batchRenderer = far::BatchRenderer2D();
-                _entityManager = std::make_unique<far::EntityManager>();
+                _entityManager = std::make_shared<far::EntityManager>();
                 far::Entity entity1 = _entityManager->createEntity();
-                std::cout << entity1 << std::endl;
+                far::Entity entity2 = _entityManager->createEntity();
+                far::Entity entity3 = _entityManager->createEntity();
+                
                 std::shared_ptr<far::TransformComponent> trans = std::make_shared<TransformComponent>();
                 std::shared_ptr<far::TextureComponent> tex = std::make_shared<TextureComponent>();
+                std::shared_ptr<far::RenderableComponent> rend = std::make_shared<RenderableComponent>();
                 tex->fileName = "SomeTexture.png";
                 trans->position = glm::vec3(2,4,5);
-                _entityManager->addComponent(entity1, trans, tex);
+                _entityManager->addComponent(entity1, tex);
+                _entityManager->addComponent(entity1, trans);
+
+                _entityManager->addComponent(entity2, rend);
+                _entityManager->addComponent(entity2, trans);
+
+                _entityManager->addComponent(entity3, rend);
+                _entityManager->addComponent(entity3, tex);
+                _entityManager->addComponent(entity3, trans);
                 std::shared_ptr<far::TransformComponent> type = _entityManager->getComponent<TransformComponent>(entity1);
                 std::shared_ptr<far::TextureComponent> texRet = _entityManager->getComponent<TextureComponent>(entity1);
                 std::cout << type->position.x << "\n";
                 std::cout << texRet->fileName << "\n";
-                _batchRenderer.submit(*_entityManager);
+
+
+                _batchRenderer.submit(_entityManager);
 
             }
 

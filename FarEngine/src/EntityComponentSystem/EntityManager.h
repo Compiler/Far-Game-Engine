@@ -9,6 +9,9 @@ namespace far{
     typedef uint64_t Entity;
     class EntityManager{
         private:
+
+            std::unordered_map<uint64_t, const char*> __dbg_compIDToName;
+        private:
             static uint64_t _ENTITY_COUNT;
             std::vector<Entity> _entities;
             std::unordered_map<ComponentID, std::vector<std::shared_ptr<Component>>> _components;
@@ -31,8 +34,10 @@ namespace far{
             template <typename CompType>
             void addComponent(Entity ent, std::shared_ptr<CompType> comp){
                 auto id = comp->getID();
+                std::cout << "'addComponent<type>'\n\tCompType id: \t" << CompType().name << " added to entity #" << ent << "\n";
+
                 _ecsMap[ent][id] = comp;
-                if(_components.find(id) != _components.end() ){
+                if(_components.find(id) == _components.end() ){
                     _components[id].push_back(comp);
                 }//else _components[id] = st/d::vector<std::shared_ptr<Component>>();
 
@@ -41,8 +46,10 @@ namespace far{
             template <typename CompType, typename... Types>
             void addComponent(Entity ent, std::shared_ptr<CompType> comp, std::shared_ptr<Types> ... types){
                 auto id = comp->getID();
+                std::cout << "'addComponent<type, types...>'\n\tCompType id: \t" << CompType().name << " added to entity #" << ent <<  "\n";
+                
                 _ecsMap[ent][id] = comp;
-                if(_components.find(id) != _components.end() ){
+                if(_components.find(id) == _components.end() ){
                     _components[id].push_back(comp);
                 }//else _components[id] = std::vector<std::shared_ptr<Component>>();
 
@@ -57,11 +64,12 @@ namespace far{
             template <typename CompType>
             std::vector<std::shared_ptr<CompType>> getComponentsList(){
                 std::vector<std::shared_ptr<CompType>> finalList;
-                std::cout << "\n!" << CompType().getID();
-                auto list = _components[CompType().getID()];
-                for(const auto& i : list){
+                std::cout << "'getComponentsList'\n\tCompType id: \t" << CompType().name << "\n";
+                auto baseList = _components[CompType().getID()];
+                std::cout << "\tBase list size: " << baseList.size() << "\n";
+                
+                for(auto i : baseList){
                     finalList.push_back(std::dynamic_pointer_cast<CompType>(i));
-
                 }
                 return finalList;
             }

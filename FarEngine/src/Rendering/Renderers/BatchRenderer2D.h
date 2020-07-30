@@ -11,7 +11,7 @@ namespace far{
         public:
         BatchRenderer2D() = default;
         //Trans ^ (Text v Renderbale)
-        void submit(far::EntityManager manager);
+        void submit(std::shared_ptr<far::EntityManager> manager);
 
 
     };
