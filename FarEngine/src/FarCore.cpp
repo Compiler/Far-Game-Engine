@@ -59,10 +59,10 @@ namespace far{
  void FarCore::init(){
     int index = 0;
 
-	loadShaders("src/Resources/Shaders/pass.vert", "src/Resources/Shaders/RayMarching.frag");
+	loadShaders("src/Resources/Shaders/pass.vert", "src/Resources/Shaders/pass.frag");
 	glUseProgram(shaderProgram);
 
-	float sz = 1.0f;
+	float sz = 3.0f / 4.0f;
 	float vertices[7 * 6] = {
 		-sz, -sz, 0.0f, 	1.0f, 1.0f, 1.0f, 1.0f, // bottom left
 		-sz,  sz, 0.0f,	1.0f, 1.0f, 1.0f, 1.0f, // top left
