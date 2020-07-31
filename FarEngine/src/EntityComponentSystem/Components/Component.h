@@ -1,5 +1,15 @@
 #pragma once
 #include <stdint.h>
+#include <glm/glm.hpp>
+#include <glm/vec4.hpp>
+
+
+   
+
+
+
+
+
 
 namespace far{
 
@@ -16,5 +26,28 @@ namespace far{
         const char* name = "Component";
         virtual ComponentID getID() = 0;
     };
+
+
+
+
+    DEFINE_COMPONENT(TransformComponent)
+            glm::vec3 position;
+            glm::vec3 size;
+        };
+
+
+
+     DEFINE_COMPONENT(TextureComponent)    
+        const char* fileName;
+    };
+
+
+    DEFINE_COMPONENT(RenderableComponent)    
+        glm::vec4 color;
+    };
+
+
+
+    
 
 }

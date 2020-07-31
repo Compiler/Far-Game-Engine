@@ -8,9 +8,8 @@
 #include <glm/vec3.hpp>
 #include <iostream>
 #include <EntityComponentSystem/EntityManager.h>
-#include <EntityComponentSystem/Components/TransformComponent.h>
-#include <EntityComponentSystem/Components/TextureComponent.h>
 #include <EntityComponentSystem/Components/Component.h>
+#include <EntityComponentSystem/ECS.h>
 #include <Rendering/Renderers/BatchRenderer2D.h>
 
 #include <Tools/Files/FileLoaderFactory.h>
@@ -58,6 +57,24 @@ namespace far{
                 _batchRenderer.submit(_entityManager);
 
 
+
+
+                FAR_WARN("==========================================");
+                ECS ecs;
+                std::shared_ptr<far::TransformComponent> tr = std::make_shared<TransformComponent>();
+                tr->position = glm::vec3(2,4,5);
+
+                auto id = ecs.createEntity();
+                ecs.registerComponent<TransformComponent>(id);
+
+
+
+                std::vector<Entity> transEntities = ecs.getAssociatedEntities<TransformComponent>();
+                for(int i =0; i < transEntities.size(); i++){
+
+
+                    //FAR_LOG("Entity #" << transEntities[i] << ": trans = (" << );
+                }
 
                 
             }

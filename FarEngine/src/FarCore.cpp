@@ -91,16 +91,17 @@ namespace far{
 
 		int width, height, nrChannels, option;
 		option = 3;
-		unsigned char* data = FileLoaderFactory::loadImage(FAR_INTERNAL_TEXTURE("wall.jpg"), &width, &height, &nrChannels, 3);
+		unsigned char* data = FileLoaderFactory::loadImage(FAR_INTERNAL_TEXTURE("wall.jpg"), &width, &height, &nrChannels, 0);
 		unsigned int texture;
 		glGenTextures(1, &texture);  
 		glBindTexture(GL_TEXTURE_2D, texture);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);	
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);  
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
 		if (data){
+			FAR_DEBUG("Creating image with (" << width << ", " << height << ") dims at " << option - 0x1907 << "+ 3bit properties and " <<nrChannels << "column channels" );
 		    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB + (option - 3), width, height, 0, GL_RGB + (option - 3), GL_UNSIGNED_BYTE, data);
 		    glGenerateMipmap(GL_TEXTURE_2D);
 		
