@@ -32,6 +32,7 @@ namespace far{
                 _buffer->position =     data.position;
                 _buffer->color =        data.color;
                 _buffer->texCoords =    data.texCoords;
+                _buffer++;
 
         }
 
@@ -47,16 +48,14 @@ namespace far{
                         auto currentTransform = manager->getComponent<TransformComponent>(ids[i]);
                         auto currentRenderable = manager->getComponent<RenderableComponent>(ids[i]);
 
-                        FAR_LOG("Entity#" << ids[i] << ": transform: (" << currentTransform->position.x << ", "  << currentTransform->position.y << ", "  << currentTransform->position.z << ")");
+                        FAR_LOG("Entity#" << ids[i] << ": transform->position: (" << currentTransform->position.x << ", "  << currentTransform->position.y << ", "  << currentTransform->position.z << ")");
+                        FAR_LOG("Entity#" << ids[i] << ": transform->size: (" << currentTransform->size.x << ", "  << currentTransform->size.y << ", "  << currentTransform->size.z << ")");
                         FAR_LOG("Entity#" << ids[i] << ": renderable: (" << currentRenderable->color.x << ", "  << currentRenderable->color.y << ", "  << currentRenderable->color.z << ")");
                         
 
 
 
                 }       
-
-                //for(auto entityid : manager->getECSMap()) if((entityid.second.find(hash_name("TransformComponent")) != entityid.second.end()) && (entityid.second.find(hash_name("RenderableComponent")) != entityid.second.end() || entityid.second.find(hash_name("TextureComponent")) != entityid.second.end())) entitiesToSubmit.push_back(entityid.first);
-                //for(auto entity : entitiesToSubmit) std::cout << "Entity to submit:\t" << entity << std::endl;
         }
 
 

@@ -39,7 +39,7 @@ namespace far{
                 
                 far::TransformComponent trans;
                 std::shared_ptr<far::TextureComponent> tex = std::make_shared<TextureComponent>();
-                std::shared_ptr<far::RenderableComponent> rend = std::make_shared<RenderableComponent>();
+                far::RenderableComponent rend;
                 tex->fileName = "SomeTexture.png";
                 _entityManager->addComponent(entity1, tex);
                 _entityManager->addComponent(entity1, trans);
@@ -47,10 +47,12 @@ namespace far{
 
                 trans.position = glm::vec3(-0.75f,-0.5f,1);
                 trans.size = glm::vec3(0.25f,0.25f,0.25f);
+                rend.color = glm::vec4(1,0,0,1);
                 _entityManager->addComponent(entity2, rend);
                 _entityManager->addComponent(entity2, trans);
                 trans.position = glm::vec3(0.45f,0.5f,1);
                 trans.size = glm::vec3(0.15f,0.35f,0.25f);
+                rend.color = glm::vec4(0,1,0,1);
                 _entityManager->addComponent(entity3, rend);
                 _entityManager->addComponent(entity3, tex);
                 _entityManager->addComponent(entity3, trans);
