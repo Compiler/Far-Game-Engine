@@ -61,9 +61,18 @@ namespace far{
                         FAR_LOG("Entity#" << ids[i] << ":     transform->size:   (" << currentTransform->size.x << ", "  << currentTransform->size.y << ", "  << currentTransform->size.z << ")");
                         FAR_LOG("Entity#" << ids[i] << ":   renderable->color:   (" << currentRenderable->color.x << ", "  << currentRenderable->color.y << ", "  << currentRenderable->color.z << ")");
 
-                        this->_setBuffer(currentTransform->position, currentRenderable->color, glm::vec2(0.f, 0.f));
-                        this->_setBuffer(glm::vec3(currentTransform->position.x + currentTransform->size.x, currentTransform->position.y, currentTransform->position.z), currentRenderable->color, glm::vec2(0.f, 0.f));
-                        this->_setBuffer(glm::vec3(currentTransform->position.x, currentTransform->position.y+currentTransform->size.y, currentTransform->position.z), currentRenderable->color, glm::vec2(0.f, 0.f));
+
+                        VertexData datum1, datum2, datum3;
+                        datum1.color =   currentRenderable->color;datum2.color =   currentRenderable->color;datum3.color =   currentRenderable->color;
+                        datum1.position =currentTransform->position;datum2.position =currentTransform->position;datum3.position =currentTransform->position;
+                        datum2.position.x = datum2.position.x + currentTransform->size.x;
+                        datum3.position.y = datum3.position.y + currentTransform->size.y;
+                        this->_setBuffer(datum1);
+                        this->_setBuffer(datum2);
+                        this->_setBuffer(datum3);
+                        GLenum error = glGetError();
+		        if(error != GL_NO_ERROR)
+			        FAR_ERROR("OpenGL Error " <<  error);
 
                         _amountSubmitted++;
 

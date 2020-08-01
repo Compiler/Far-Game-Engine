@@ -14,6 +14,7 @@ namespace far{
         glm::vec2 texCoords;
 
         VertexData(glm::vec3 p, glm::vec4 c, glm::vec2 tc):position(p), color(c), texCoords(tc){}
+        VertexData(){}
     };
 
     class BatchRenderer2D{
