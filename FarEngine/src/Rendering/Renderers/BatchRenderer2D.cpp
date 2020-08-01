@@ -5,6 +5,7 @@ namespace far{
 
 
         void far::BatchRenderer2D::init(){
+                FAR_LOG("BatchRenderer init()");
                 glGenVertexArrays(1, &_vertexArrayID);
                 glBindVertexArray(_vertexArrayID);
 

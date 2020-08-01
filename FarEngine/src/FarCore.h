@@ -1,6 +1,6 @@
 #pragma once
+#include <far.h>
 #include <stdint.h>
-#include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <Rendering/Window.h>
 #include <Tools/Files/FileLoaderFactory.h>
@@ -31,7 +31,6 @@ namespace far{
         public:
 
             void initForPep(){
-                _batchRenderer = far::BatchRenderer2D();
                 _entityManager = std::make_shared<far::EntityManager>();
                 far::Entity entity1 = _entityManager->createEntity();
                 far::Entity entity2 = _entityManager->createEntity();
@@ -57,7 +56,6 @@ namespace far{
                 _entityManager->addComponent(entity3, tex);
                 _entityManager->addComponent(entity3, trans);
 
-                _batchRenderer.init();
             }
 
             void load();

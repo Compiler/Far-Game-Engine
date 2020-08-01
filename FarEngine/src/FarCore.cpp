@@ -14,6 +14,7 @@ namespace far{
         init();
         //glViewport(0, 0, 640, 480); //oopsxd
 
+        _batchRenderer = far::BatchRenderer2D();
 
 
 

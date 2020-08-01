@@ -1,5 +1,5 @@
 #pragma once
-#include <glad/glad.h>
+#include <far.h>
 #include <EntityComponentSystem/EntityManager.h>
 #include <EntityComponentSystem/Components/Component.h>
 namespace far{
