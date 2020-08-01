@@ -1,5 +1,5 @@
 #include "BatchRenderer2D.h"
-#include <iostream>
+#include <cassert>
 namespace far{
 
 
@@ -20,6 +20,10 @@ namespace far{
                 glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, FAR_VERTEX_SIZE, (const void*)  0                  );
                 glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, FAR_VERTEX_SIZE, (const void*) (3 * sizeof(float)) );
                 glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, FAR_VERTEX_SIZE, (const void*) (7 * sizeof(float)) );
+
+                glBindVertexArray(0);
+                assert(FAR_BUFFER_SIZE % 9 == 0);
+
         }
         
         void far::BatchRenderer2D::begin(){
@@ -58,11 +62,14 @@ namespace far{
                         FAR_LOG("Entity#" << ids[i] << ":   renderable->color:   (" << currentRenderable->color.x << ", "  << currentRenderable->color.y << ", "  << currentRenderable->color.z << ")");
 
                         this->_setBuffer(currentTransform->position, currentRenderable->color, glm::vec2(0.f, 0.f));
+                        this->_setBuffer(glm::vec3(currentTransform->position.x + currentTransform->size.x, currentTransform->position.y, currentTransform->position.z), currentRenderable->color, glm::vec2(0.f, 0.f));
+                        this->_setBuffer(glm::vec3(currentTransform->position.x, currentTransform->position.y+currentTransform->size.y, currentTransform->position.z), currentRenderable->color, glm::vec2(0.f, 0.f));
+
                         _amountSubmitted++;
 
                         FAR_LOG("Amount submitted: " << _amountSubmitted);
+                
                 }
-
 
         }
 
@@ -75,8 +82,9 @@ namespace far{
 
         void far::BatchRenderer2D::flush(){
                 glBindVertexArray(_vertexArrayID);
-                glDrawArrays( GL_TRIANGLES, 0, _amountSubmitted);
-
+                glBindBuffer(GL_ARRAY_BUFFER, _bufferID);
+                glDrawArrays(GL_TRIANGLES, 0, _amountSubmitted*3);
+                _amountSubmitted = 0;
         }
 
 

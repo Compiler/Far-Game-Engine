@@ -46,7 +46,7 @@ namespace far{
 
                 trans.position = glm::vec3(-0.75f,-0.5f,1);
                 trans.size = glm::vec3(0.25f,0.25f,0.25f);
-                rend.color = glm::vec4(1,0,0,1);
+                rend.color = glm::vec4(0,0,1,1);
                 _entityManager->addComponent(entity2, rend);
                 _entityManager->addComponent(entity2, trans);
                 trans.position = glm::vec3(0.45f,0.5f,1);

@@ -15,13 +15,7 @@ namespace far{
         //glViewport(0, 0, 640, 480); //oopsxd
 
         _batchRenderer = far::BatchRenderer2D();
-
-
-
-
-		
-
-
+		_batchRenderer.init();
 
     }
     void FarCore::update(){
@@ -41,8 +35,8 @@ namespace far{
 		glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
         glClearColor(0.2, 0.2, 0.4, 1.0);
 		glUseProgram(shaderProgram);
-		static int loc = glGetUniformLocation(shaderProgram, "u_texture");
-		glUniform1f(loc, 0);
+		//static int loc = glGetUniformLocation(shaderProgram, "u_texture");
+		//glUniform1f(loc, 0);
 		//glBindVertexArray(arrayID);
 		//glDrawArrays(GL_TRIANGLES, 0, 6);
 		glfwSwapBuffers(_windowRef->getWindow());
