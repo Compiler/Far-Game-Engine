@@ -18,6 +18,9 @@ namespace far{
 		_batchRenderer.init();
 
 
+		//audio = new ikAudio();
+		//audio->playSound(FAR_INTERNAL_SOUNDS("Tension.mp3"));
+
     }
     void FarCore::update(){
 		glfwPollEvents();

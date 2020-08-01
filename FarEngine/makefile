@@ -22,22 +22,23 @@ SPDLOG_INC = $(SPDLOG_ROOT)include
 SPDLOG_SRC = $(SPDLOG_ROOT)src
 
 STBIMAGE_ROOT = outsourced/stbimage
-FMOD_ROOT = outsourced/FMOD
-FMOD_INC = $(FMOD_ROOT)/inc/
-FMOD_LIB = $(FMOD_ROOT)/lib/
+
+IRRKLANG_ROOT = outsourced/irrKlang
+IRRKLANG_INC = $(IRRKLANG_ROOT)/inc/
+IRRKLANG_LIB = $(IRRKLANG_ROOT)/lib/win64/
 
 GLM_ROOT = outsourced/glm/
 
 INC_INTERNAL = -I $(SRC_DIR) 
-INC=-I $(SRC_DIR)/ -I $(GLAD_INC) -I $(GLFW_INC) -I $(GLM_ROOT) -I $(STBIMAGE_ROOT) -I $(SPDLOG_INC) -I $(FMOD_INC)
-LIBS = -L $(GLFW_LIB) -L $(FMOD_LIB)
-LINKS = -lglfw3 -lglu32 -lopengl32 -lgdi32 -lfmod
+INC=-I $(SRC_DIR)/ -I $(GLAD_INC) -I $(GLFW_INC) -I $(GLM_ROOT) -I $(STBIMAGE_ROOT) -I $(IRRKLANG_INC)
+LIBS = -L $(GLFW_LIB) -L $(IRRKLANG_LIB)
+LINKS = -lglfw3 -lglu32 -lopengl32 -lgdi32 -lirrKlang
 
 
 
 OBJECTS = $(OUT_DIR)/FileLoaderFactory.o $(OUT_DIR)/StartupSystems.o $(OUT_DIR)/Window.o\
  $(OUT_DIR)/FarCore.o  $(OUT_DIR)/EntityManager.o $(OUT_DIR)/HashImplementation.o\
- $(OUT_DIR)/BatchRenderer2D.o  $(OUT_DIR)/InputManager.o
+ $(OUT_DIR)/BatchRenderer2D.o  $(OUT_DIR)/InputManager.o #$(OUT_DIR)/ikAudio.o  
 all: main
 
 main: $(ENTRY_POINT) FarCore.o
@@ -45,8 +46,8 @@ main: $(ENTRY_POINT) FarCore.o
 
 
 ALL_SETTINGS = $(CXX) $(CXXFLAGS) $(LIBS) $(INC) $(INC_INTERNAL)
-FarCore.o: $(SRC_DIR)/FarCore.cpp StartupSystems.o FileLoaderFactory.o Window.o EntityManager.o HashImplementation.o BatchRenderer2D.o InputManager.o
-	$(ALL_SETTINGS) -c $(SRC_DIR)/FarCore.cpp -o $(OUT_DIR)/FarCore.o
+FarCore.o: $(SRC_DIR)/FarCore.cpp StartupSystems.o FileLoaderFactory.o Window.o EntityManager.o HashImplementation.o BatchRenderer2D.o InputManager.o 
+	$(ALL_SETTINGS) -c $(SRC_DIR)/FarCore.cpp -o $(OUT_DIR)/FarCore.o 
 
 StartupSystems.o: $(SRC_DIR)/Startup/StartupSystems.cpp
 	$(ALL_SETTINGS) -c $(SRC_DIR)/Startup/StartupSystems.cpp -o $(OUT_DIR)/StartupSystems.o
@@ -74,6 +75,9 @@ InputManager.o: $(SRC_DIR)/Tools/Input/InputManager.cpp
 
 Logger.o: $(SRC_DIR)/Tools/Logging/Logger.cpp
 	$(ALL_SETTINGS) -c $(SRC_DIR)/Tools/Logging/Logger.cpp -o $(OUT_DIR)/Logger.o  
+
+ikAudio.o: $(SRC_DIR)/Audio/ikAudio.cpp
+	$(ALL_SETTINGS) -c $(SRC_DIR)/Audio/ikAudio.cpp -o $(OUT_DIR)/ikAudio.o  
 
 
 run: $(OUT_DIR)/$(LAUNCHER_NAME).exe
