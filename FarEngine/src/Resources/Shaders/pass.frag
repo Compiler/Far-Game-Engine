@@ -9,6 +9,6 @@ layout(location = 0) out vec4 outColor;
 //uniform sampler2D u_texture;
 
 void main(){
-    o_color.y = o_texCoords.y;
     outColor = o_color;
+    outColor.y = o_texCoords.y;
 }

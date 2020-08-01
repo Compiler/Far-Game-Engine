@@ -11,11 +11,12 @@ namespace far{
         StartupSystems::_initGLFW();
         _windowRef = new Window(1080, 720, "Far Game Engine", false);
         StartupSystems::_initGlad();
+
         init();
         //glViewport(0, 0, 640, 480); //oopsxd
-
         _batchRenderer = far::BatchRenderer2D();
 		_batchRenderer.init();
+
 
     }
     void FarCore::update(){
@@ -32,6 +33,8 @@ namespace far{
     }
 
     void FarCore::render(){
+
+		FAR_DEBUG("Pre-program")
 		glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
         glClearColor(0.2, 0.2, 0.4, 1.0);
 		glUseProgram(shaderProgram);
@@ -39,6 +42,7 @@ namespace far{
 		//glUniform1f(loc, 0);
 		//glBindVertexArray(arrayID);
 		//glDrawArrays(GL_TRIANGLES, 0, 6);
+		FAR_DEBUG("Pre-begin()")
 		frames++;
 		_batchRenderer.begin();
     	_batchRenderer.submit(_entityManager);
