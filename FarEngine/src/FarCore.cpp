@@ -42,8 +42,8 @@ namespace far{
 		glUseProgram(shaderProgram);
 		static int loc = glGetUniformLocation(shaderProgram, "u_texture");
 		glUniform1f(loc, 0);
-		glBindVertexArray(arrayID);
-		glDrawArrays(GL_TRIANGLES, 0, 6);
+		//glBindVertexArray(arrayID);
+		//glDrawArrays(GL_TRIANGLES, 0, 6);
 		glfwSwapBuffers(_windowRef->getWindow());
 		frames++;
 

@@ -45,13 +45,12 @@ namespace far{
                 _entityManager->addComponent(entity1, trans);
 
 
-                trans.position = glm::vec3(2,4,5);
-                trans.size = glm::vec3(1,1,1);
+                trans.position = glm::vec3(-0.75f,-0.5f,1);
+                trans.size = glm::vec3(0.25f,0.25f,0.25f);
                 _entityManager->addComponent(entity2, rend);
                 _entityManager->addComponent(entity2, trans);
-
-                trans.position = glm::vec3(1,2,3);
-                trans.size = glm::vec3(2,2,2);
+                trans.position = glm::vec3(0.45f,0.5f,1);
+                trans.size = glm::vec3(0.15f,0.35f,0.25f);
                 _entityManager->addComponent(entity3, rend);
                 _entityManager->addComponent(entity3, tex);
                 _entityManager->addComponent(entity3, trans);
