@@ -61,4 +61,16 @@ namespace far{
 
 
 
+
+        void far::BatchRenderer2D::end(){
+                glUnmapBuffer(GL_ARRAY_BUFFER);
+        }
+
+        void far::BatchRenderer2D::flush(){
+                glBindVertexArray(_vertexArrayID);
+                glDrawArrays( GL_TRIANGLES, 0, _amountSubmitted);
+
+        }
+
+
 }

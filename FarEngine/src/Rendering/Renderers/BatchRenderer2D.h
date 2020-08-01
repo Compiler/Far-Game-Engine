@@ -1,5 +1,4 @@
 #pragma once
-#include <gl/GL.h>
 #include <glad/glad.h>
 #include <EntityComponentSystem/EntityManager.h>
 #include <EntityComponentSystem/Components/Component.h>
@@ -23,6 +22,7 @@ namespace far{
             unsigned int _vertexArrayID, _bufferID;
             VertexData* _buffer;
             void _setBuffer(VertexData data);
+            uint32_t _amountSubmitted;
 
         public:
         BatchRenderer2D() = default;
