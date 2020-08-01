@@ -1,16 +1,37 @@
 #pragma once
+#include <gl/GL.h>
+#include <glad/glad.h>
 #include <EntityComponentSystem/EntityManager.h>
 #include <EntityComponentSystem/Components/Component.h>
 namespace far{
 
+    #define MAX_RENDERABLES 65536
+    #define FAR_VERTEX_SIZE sizeof(far::VertexData)
+    #define FAR_BUFFER_SIZE MAX_RENDERABLES * FAR_VERTEX_SIZE
+
+    struct VertexData{
+        glm::vec3 position;
+        glm::vec4 color;
+        glm::vec2 texCoords;
+
+        VertexData(glm::vec3 p, glm::vec4 c, glm::vec3 tc):position(p), color(c), texCoords(tc){}
+    };
+
     class BatchRenderer2D{
 
+        private:
+            unsigned int _vertexArrayID, _bufferID;
+            VertexData* _buffer;
+            void _setBuffer(VertexData data);
 
         public:
         BatchRenderer2D() = default;
         //Trans ^ (Text v Renderbale)
+        void init();
+        void begin();
         void submit(std::shared_ptr<far::EntityManager> manager);
-
+        void end();
+        void flush();
 
     };
 

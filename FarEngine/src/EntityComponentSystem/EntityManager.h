@@ -35,12 +35,24 @@ namespace far{
             template <typename CompType>
             void addComponent(Entity ent, std::shared_ptr<CompType> comp){
                 auto id = comp->getID();
-               auto name = CompType().name;
-               FAR_LOG("'addComponent<type>'\n\tCompType id: \t" << CompType().name << " added to entity #" << ent);
+                auto name = CompType().name;
+                FAR_LOG("'addComponent<type>'\n\tCompType id: \t" << CompType().name << " added to entity #" << ent);
                 _ecsMap[ent][id] = comp;
-                if(_components.find(id) == _components.end() ){
-                    _components[id].push_back(comp);
-                }//else _components[id] = st/d::vector<std::shared_ptr<Component>>();
+                _components[id].push_back(comp);
+
+            }
+
+
+            template <typename CompType>
+            void addComponent(Entity ent, CompType comp){
+                auto id = comp.getID();
+                auto compPtr = std::make_shared<CompType>(comp);
+                auto name = CompType().name;
+                FAR_LOG("'addComponent<type>'\n\tCompType id: \t" << CompType().name << " added to entity #" << ent);
+                    _ecsMap[ent][id] = compPtr;
+                    if(_components.find(id) == _components.end() ){
+                        _components[id].push_back(compPtr);
+                    }//else _components[id] = st/d::vector<std::shared_ptr<Component>>();
 
             }
 
@@ -74,6 +86,46 @@ namespace far{
                 return finalList;
             }
 
+            template<typename T>
+            std::vector<Entity> getAssociatedEntities(){
+                std::vector<Entity> ids;
+                Entity current;
+                for(int i = 0; i <_entities.size(); i++){
+                    current = _entities[i];
+                    if(_ecsMap[current][T().getID()]) ids.push_back(current);
+
+                }
+
+                return ids;
+
+            }
+            template<typename T, typename M>
+            std::vector<Entity> getAssociatedEntities(){
+                std::vector<Entity> ids;
+                Entity current;
+                for(int i = 0; i <_entities.size(); i++){
+                    current = _entities[i];
+                    if(_ecsMap[current][T().getID()] && _ecsMap[current][M().getID()]) ids.push_back(current);
+
+                }
+
+                return ids;
+
+            }
+
+            template<typename T, typename M, typename N>
+            std::vector<Entity> getAssociatedEntities(){
+                std::vector<Entity> ids;
+                Entity current;
+                for(int i = 0; i <_entities.size(); i++){
+                    current = _entities[i];
+                    if(_ecsMap[current][T().getID()] && _ecsMap[current][M().getID()] && _ecsMap[current][N().getID()]) ids.push_back(current);
+
+                }
+
+                return ids;
+
+            }
 
            
 
