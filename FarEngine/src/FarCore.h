@@ -57,12 +57,7 @@ namespace far{
                 _entityManager->addComponent(entity3, tex);
                 _entityManager->addComponent(entity3, trans);
 
-                _batchRenderer.submit(_entityManager);
-
-
-
-
-                
+                _batchRenderer.init();
             }
 
             void load();

@@ -24,8 +24,6 @@ namespace far{
         void far::BatchRenderer2D::begin(){
                 glBindBuffer(GL_ARRAY_BUFFER, _bufferID);
                 _buffer = (far::VertexData*) glMapBuffer(GL_ARRAY_BUFFER, GL_WRITE_ONLY);
-                
-
         }
 
         void far::BatchRenderer2D::_setBuffer(VertexData data){
@@ -33,8 +31,14 @@ namespace far{
                 _buffer->color =        data.color;
                 _buffer->texCoords =    data.texCoords;
                 _buffer++;
-
         }
+        void far::BatchRenderer2D::_setBuffer(glm::vec3 pos, glm::vec4 col, glm::vec2 tex){
+                _buffer->position =     pos;
+                _buffer->color =        col;
+                _buffer->texCoords =    tex;
+                _buffer++;
+        }
+
 
         void far::BatchRenderer2D::submit(std::shared_ptr<far::EntityManager> manager){
                 std::vector<Entity> entitiesToSubmit;
@@ -48,14 +52,17 @@ namespace far{
                         auto currentTransform = manager->getComponent<TransformComponent>(ids[i]);
                         auto currentRenderable = manager->getComponent<RenderableComponent>(ids[i]);
 
-                        FAR_LOG("Entity#" << ids[i] << ": transform->position: (" << currentTransform->position.x << ", "  << currentTransform->position.y << ", "  << currentTransform->position.z << ")");
-                        FAR_LOG("Entity#" << ids[i] << ": transform->size: (" << currentTransform->size.x << ", "  << currentTransform->size.y << ", "  << currentTransform->size.z << ")");
-                        FAR_LOG("Entity#" << ids[i] << ": renderable: (" << currentRenderable->color.x << ", "  << currentRenderable->color.y << ", "  << currentRenderable->color.z << ")");
-                        
+                        FAR_LOG("Entity#" << ids[i] << ": transform->position:   (" << currentTransform->position.x << ", "  << currentTransform->position.y << ", "  << currentTransform->position.z << ")");
+                        FAR_LOG("Entity#" << ids[i] << ":     transform->size:   (" << currentTransform->size.x << ", "  << currentTransform->size.y << ", "  << currentTransform->size.z << ")");
+                        FAR_LOG("Entity#" << ids[i] << ":   renderable->color:   (" << currentRenderable->color.x << ", "  << currentRenderable->color.y << ", "  << currentRenderable->color.z << ")");
+
+                        this->_setBuffer(currentTransform->position, currentRenderable->color, glm::vec2(0.f, 0.f));
+                        _amountSubmitted++;
+
+                        FAR_LOG("Amount submitted: " << _amountSubmitted);
+                }
 
 
-
-                }       
         }
 
 

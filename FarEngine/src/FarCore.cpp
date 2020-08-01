@@ -46,6 +46,10 @@ namespace far{
 		//glDrawArrays(GL_TRIANGLES, 0, 6);
 		glfwSwapBuffers(_windowRef->getWindow());
 		frames++;
+		_batchRenderer.begin();
+    	_batchRenderer.submit(_entityManager);
+		_batchRenderer.end();
+		_batchRenderer.flush();
 
     }
 

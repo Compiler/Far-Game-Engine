@@ -13,7 +13,7 @@ namespace far{
         glm::vec4 color;
         glm::vec2 texCoords;
 
-        VertexData(glm::vec3 p, glm::vec4 c, glm::vec3 tc):position(p), color(c), texCoords(tc){}
+        VertexData(glm::vec3 p, glm::vec4 c, glm::vec2 tc):position(p), color(c), texCoords(tc){}
     };
 
     class BatchRenderer2D{
@@ -22,6 +22,7 @@ namespace far{
             unsigned int _vertexArrayID, _bufferID;
             VertexData* _buffer;
             void _setBuffer(VertexData data);
+            void _setBuffer(glm::vec3 pos, glm::vec4 col, glm::vec2 tex);
             uint32_t _amountSubmitted;
 
         public:
