@@ -27,17 +27,12 @@ namespace far{
         virtual ComponentID getID() = 0;
     };
 
-
-
-
     DEFINE_COMPONENT(TransformComponent)
-            glm::vec3 position;
-            glm::vec3 size;
-        };
+        glm::vec3 position;
+        glm::vec3 size;
+    };
 
-
-
-     DEFINE_COMPONENT(TextureComponent)    
+    DEFINE_COMPONENT(TextureComponent)    
         const char* fileName;
     };
 
@@ -46,8 +41,8 @@ namespace far{
         glm::vec4 color;
     };
 
-
-
-    
+    DEFINE_COMPONENT(MeshComponent)
+        unsigned int* indices;
+    };
 
 }
