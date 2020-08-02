@@ -104,6 +104,9 @@ namespace far{
 
                 }
 
+
+                
+
         }
 
         void far::BatchRenderer2D::end(){

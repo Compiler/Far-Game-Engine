@@ -7,6 +7,7 @@
 #define FAR_INTERNAL_SHADER(x)  FAR_INTERNAL("Shaders/") x
 #define FAR_INTERNAL_TEXTURE(x) FAR_INTERNAL("Textures/") x
 #define FAR_INTERNAL_MODEL(x)   FAR_INTERNAL("Models/") x
+#define FAR_INTERNAL_SOUNDS(x)   FAR_INTERNAL("Sounds/") x
 
 
 namespace far {

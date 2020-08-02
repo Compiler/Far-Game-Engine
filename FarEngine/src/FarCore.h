@@ -13,6 +13,8 @@
 #include <Tools/Files/FileLoaderFactory.h>
 #include <Tools/Logging/TmpLog.h>
 
+//#include <Audio/ikAudio.h> ///TODO: include audio in makefile and test dll/.exp
+
 
 
 namespace far{
@@ -26,11 +28,12 @@ namespace far{
             std::shared_ptr<far::EntityManager> _entityManager;
             far::BatchRenderer2D _batchRenderer;
 	        
-            
+           // ikAudio* audio;
 
         public:
 
             void initForPep(){
+
                 _entityManager = std::make_shared<far::EntityManager>();
                 far::Entity entity1 = _entityManager->createEntity();
                 far::Entity entity2 = _entityManager->createEntity();
