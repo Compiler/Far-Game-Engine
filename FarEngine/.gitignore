@@ -3,3 +3,5 @@ settings.json
 
 /bin/libstdc++-6.dll
 /bin/*.o
+/bin/*.*
+/bin/*.exe
