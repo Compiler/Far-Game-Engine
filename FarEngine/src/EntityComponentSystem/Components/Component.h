@@ -16,7 +16,11 @@ namespace far{
     extern uint32_t hash_name(const char* str);
     #define DEFINE_COMPONENT(component_name) \
 	struct component_name : public Component { \
-		virtual ComponentID getID(){return hash_name(#component_name);}\
+		virtual ComponentID getID(){\
+            static int hashed = 0;\
+            if(!hashed) hashed = hash_name(#component_name);                        \
+            return hashed;\
+        }\
         const char* name = #component_name;
 
 
