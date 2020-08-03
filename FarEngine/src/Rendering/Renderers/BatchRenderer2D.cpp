@@ -60,7 +60,7 @@ namespace far{
         }
 
         void far::BatchRenderer2D::submit(std::shared_ptr<far::EntityManager> manager){
-        
+                unsigned short prevInd = 0;
                 std::vector<Entity> entitiesToSubmit;
                 std::vector<VertexData> vertices;
                 std::vector<std::vector<std::shared_ptr<Component>>> list = std::vector<std::vector<std::shared_ptr<Component>>>();
@@ -76,23 +76,23 @@ namespace far{
                                 this->_setBuffer(VertexData(v, currentRenderable->color));
                         }
                         // n-2 triangles, 3 indices per triangle
-                        unsigned short currentInd = 2;
+                        unsigned short currentInd = 2 + prevInd;
                         bool prevFlag = false;
-                        for(i = 0; i < 3*(currentMesh->vertices.size()-2); i++){
+                        for(unsigned int j = 0; j < 3*(currentMesh->vertices.size()-2); j++){
                                 if(prevFlag){ // replaced !((i+1)%3); means that modulo doesnt have to be calculated twice
                                         currentInd-=2;
                                         prevFlag = false;
                                 }
-                                if(!(i%3)){
-                                        _ind[i] = 0;
-                                        FAR_DEBUG(0);
+                                if(!(j%3)){
+                                        _ind[_amountSubmitted] = prevInd;
+                                        FAR_DEBUG(_amountSubmitted << ":" << prevInd);
                                         prevFlag = true;
                                         currentInd++;
 
                                 }
                                 else{
-                                        _ind[i] = currentInd;
-                                        FAR_DEBUG(currentInd);
+                                        _ind[_amountSubmitted] = currentInd;
+                                        FAR_DEBUG(_amountSubmitted << ":" << currentInd);
                                         currentInd++;
 
                                 }
@@ -100,7 +100,7 @@ namespace far{
 
                         };
 
-
+                        prevInd = currentInd;
 
                 }
                 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _indexBufferID);
@@ -121,7 +121,7 @@ namespace far{
                 glBindBuffer(GL_ARRAY_BUFFER, _bufferID);
                 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _indexBufferID);
                 FAR_DEBUG("Final amount submitted: " << _amountSubmitted);
-                glDrawElements(GL_TRIANGLES, _amountSubmitted*3, GL_UNSIGNED_SHORT, 0);
+                glDrawElements(GL_TRIANGLES, _amountSubmitted, GL_UNSIGNED_SHORT, 0);
                 _amountSubmitted = 0;
 
         }

@@ -62,21 +62,23 @@ namespace far{
                 far::TransformComponent trans;
                 far::RenderableComponent rend;
                 far::MeshComponent mesh;
-                far::RenderableComponent rend2;
-                far::MeshComponent mesh2;
+                trans.position = glm::vec3(1.f, 1.f, 1.f);
+                trans.size = glm::vec3(1.f, 1.f, 1.f);
                 mesh.vertices = { glm::vec3(0.0f, 0.5f, 1.f), glm::vec3(0.5f, 0.0f, 1.f), glm::vec3(0.25f, -0.5f, 1.f), glm::vec3(-0.25f, -0.5f, 1.f), glm::vec3(-0.5f, 0.0f, 1.f) };
-                rend.color = glm::vec4(0.5f, 0.2f, 0.7f, 1.0f);
+                rend.color = glm::vec4(0.5f, 0.2f, 0.7f, 1.f);
                 _entityManager->addComponent(entity1, mesh);
                 _entityManager->addComponent(entity1, rend);
                 _entityManager->addComponent(entity1, trans);
-                mesh2.vertices = { glm::vec3(0.75f, 0.75f, 1.f), glm::vec3(0.75f, 0.5f, 1.f), glm::vec3(0.5f, 0.5f, 1.f), glm::vec3(0.75f, 0.5f, 1.f) };
-                rend2.color = glm::vec4(1.0f, 0.f, 1.0f, 1.0f);
-                _entityManager->addComponent(entity2, mesh2);
-                _entityManager->addComponent(entity2, rend2);
+                mesh.vertices = { glm::vec3(0.75f, 0.75f, 1.f), glm::vec3(0.75f, 0.5f, 1.f), glm::vec3(0.5f, 0.5f, 1.f), glm::vec3(0.5f, 0.75f, 1.f) };
+                rend.color = glm::vec4(1.f, 0.f, 1.f, 1.f);
+                _entityManager->addComponent(entity2, mesh);
+                _entityManager->addComponent(entity2, rend);
                 _entityManager->addComponent(entity2, trans);
-
-
-                
+                mesh.vertices = { glm::vec3(-0.4f, 0.4f, 1.f), glm::vec3(-0.6f, 0.6f, 1.f), glm::vec3(-0.5f, 0.8f, 1.f), glm::vec3(-0.475f, 0.7f, 1.f), glm::vec3(-0.325f, 0.7f, 1.f), glm::vec3(-0.3f, 0.8f, 1.f), glm::vec3(-0.2f, 0.6f, 1.f) };
+                rend.color = glm::vec4(static_cast<float>(83)/85.f, static_cast<float>(7)/17.f, static_cast<float>(14)/255.f, 1.f);
+                _entityManager->addComponent(entity3, mesh);                
+                _entityManager->addComponent(entity3, rend);                
+                _entityManager->addComponent(entity3, trans);                
             }
             void load();
             void update();
