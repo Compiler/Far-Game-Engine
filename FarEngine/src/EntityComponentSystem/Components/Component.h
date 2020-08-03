@@ -2,12 +2,7 @@
 #include <stdint.h>
 #include <glm/glm.hpp>
 #include <glm/vec4.hpp>
-
-
-   
-
-
-
+#include <vector>
 
 
 
@@ -46,7 +41,7 @@ namespace far{
     };
 
     DEFINE_COMPONENT(MeshComponent)
-        unsigned int* indices;
+        std::vector<glm::vec3> vertices;
     };
 
 }

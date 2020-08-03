@@ -17,6 +17,7 @@ namespace far{
         glm::vec2 texCoords;
 
         VertexData(glm::vec3 p, glm::vec4 c, glm::vec2 tc):position(p), color(c), texCoords(tc){}
+        VertexData(glm::vec3 p, glm::vec4 c):position(p), color(c){}
         VertexData(){ color = glm::vec4(1.f, 1.f, 1.f, 1.f); texCoords = glm::vec2(1.f, 1.f);};
 
     };
@@ -28,6 +29,7 @@ namespace far{
             unsigned int _vertexArrayID, _bufferID, _indexBufferID;
             VertexData* _buffer;
             void _setBuffer(VertexData data);
+            unsigned short _ind[FAR_INDEX_BUFFER_SIZE];
             void _setBuffer(glm::vec3 pos, glm::vec4 col, glm::vec2 tex);
             uint32_t _amountSubmitted;
 
