@@ -36,7 +36,6 @@ namespace far{
         
         void far::BatchRenderer2D::begin(){
 
-                FAR_LOG("BatchRenderer begin()");
                 glBindBuffer(GL_ARRAY_BUFFER, _bufferID);
                 _buffer = (far::VertexData*) glMapBuffer(GL_ARRAY_BUFFER, GL_WRITE_ONLY);
 
@@ -66,12 +65,13 @@ namespace far{
                 std::vector<VertexData> vertices;
                 std::vector<std::vector<std::shared_ptr<Component>>> list = std::vector<std::vector<std::shared_ptr<Component>>>();
                 auto ids = manager->getAssociatedEntities<TransformComponent, RenderableComponent, MeshComponent>();
+                FAR_LOG("# OF ENTITIES: " << ids.size());
                 for(int i = 0; i < ids.size(); i++){
-                        
+                        FAR_DEBUG("ENTITY#" << i);
                         auto currentTransform = manager->getComponent<TransformComponent>(ids[i]);
                         auto currentRenderable = manager->getComponent<RenderableComponent>(ids[i]);
                         auto currentMesh = manager->getComponent<MeshComponent>(ids[i]);
-
+                        FAR_DEBUG("CURRENT MESH: " << currentMesh->vertices.size());
                         for(auto v : currentMesh->vertices){
                                 this->_setBuffer(VertexData(v, currentRenderable->color));
                         }
@@ -96,14 +96,16 @@ namespace far{
                                         currentInd++;
 
                                 }
+                                _amountSubmitted++;
+
                         };
 
 
-                        _amountSubmitted++;
-
 
                 }
-                
+                glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _indexBufferID);
+                glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(_ind), _ind, GL_STATIC_DRAW);
+
 
         }
 

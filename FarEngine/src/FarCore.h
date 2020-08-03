@@ -62,12 +62,21 @@ namespace far{
                 far::TransformComponent trans;
                 far::RenderableComponent rend;
                 far::MeshComponent mesh;
-
+                far::RenderableComponent rend2;
+                far::MeshComponent mesh2;
                 mesh.vertices = { glm::vec3(0.0f, 0.5f, 1.f), glm::vec3(0.5f, 0.0f, 1.f), glm::vec3(0.25f, -0.5f, 1.f), glm::vec3(-0.25f, -0.5f, 1.f), glm::vec3(-0.5f, 0.0f, 1.f) };
                 rend.color = glm::vec4(0.5f, 0.2f, 0.7f, 1.0f);
                 _entityManager->addComponent(entity1, mesh);
                 _entityManager->addComponent(entity1, rend);
                 _entityManager->addComponent(entity1, trans);
+                mesh2.vertices = { glm::vec3(0.75f, 0.75f, 1.f), glm::vec3(0.75f, 0.5f, 1.f), glm::vec3(0.5f, 0.5f, 1.f), glm::vec3(0.75f, 0.5f, 1.f) };
+                rend2.color = glm::vec4(1.0f, 0.f, 1.0f, 1.0f);
+                _entityManager->addComponent(entity2, mesh2);
+                _entityManager->addComponent(entity2, rend2);
+                _entityManager->addComponent(entity2, trans);
+
+
+                
             }
             void load();
             void update();
