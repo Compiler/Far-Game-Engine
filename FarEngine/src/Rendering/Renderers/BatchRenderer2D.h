@@ -8,7 +8,7 @@ namespace far{
     #define MAX_RENDERABLES         65536
     #define FAR_VERTEX_SIZE         sizeof(far::VertexData)
     #define FAR_BUFFER_SIZE         MAX_RENDERABLES * FAR_VERTEX_SIZE
-    #define FAR_INDEX_BUFFER_SIZE   3*65536
+    #define FAR_INDEX_BUFFER_SIZE   65536
 
     struct VertexData{
 
@@ -27,7 +27,6 @@ namespace far{
 
             unsigned int _vertexArrayID, _bufferID, _indexBufferID;
             VertexData* _buffer;
-            unsigned int* _indices;
             void _setBuffer(VertexData data);
             void _setBuffer(glm::vec3 pos, glm::vec4 col, glm::vec2 tex);
             uint32_t _amountSubmitted;

@@ -25,7 +25,9 @@ namespace far{
                 
                 glGenBuffers(1, &_indexBufferID);
                 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _indexBufferID);
-                glBufferData(GL_ELEMENT_ARRAY_BUFFER, FAR_INDEX_BUFFER_SIZE, this->_indices, GL_DYNAMIC_DRAW);
+                unsigned short ind[FAR_INDEX_BUFFER_SIZE];
+                for(int i = 0; i < FAR_INDEX_BUFFER_SIZE; i++) ind[i] = i;
+                glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(ind), ind, GL_STATIC_DRAW);
 
                 glBindVertexArray(0);
                 assert(FAR_BUFFER_SIZE % 9 == 0);
@@ -63,7 +65,6 @@ namespace far{
                 std::vector<Entity> entitiesToSubmit;
                 std::vector<std::vector<std::shared_ptr<Component>>> list = std::vector<std::vector<std::shared_ptr<Component>>>();
                 auto ids = manager->getAssociatedEntities<TransformComponent, RenderableComponent>();
-                _indices = new unsigned int[ids.size()*3];
                 for(int i = 0; i < ids.size(); i++){
                         
                         auto currentTransform = manager->getComponent<TransformComponent>(ids[i]);
@@ -88,15 +89,12 @@ namespace far{
                         datum3.position.y = datum3.position.y + currentTransform->size.y;
 
                         this->_setBuffer(datum1);
-                        _indices[_amountSubmitted*3] = _amountSubmitted*3;
                         FAR_DEBUG("Index:Vertex - " << _amountSubmitted*3 << ":(" << datum1.position.x << ", " << datum1.position.y << ", " << datum1.position.z << ")");
 
                         this->_setBuffer(datum2);
-                        _indices[_amountSubmitted*3+1] = _amountSubmitted*3+1;
                         FAR_DEBUG("Index:Vertex - " << _amountSubmitted*3+1 << ":(" << datum2.position.x << ", " << datum2.position.y << ", " << datum2.position.z << ")");
                         
                         this->_setBuffer(datum3);
-                        _indices[_amountSubmitted*3+2] = _amountSubmitted*3+2;
                         FAR_DEBUG("Index:Vertex - " << _amountSubmitted*3+2 << ":(" << datum3.position.x << ", " << datum3.position.y << ", " << datum3.position.z << ")");
                         
                         _amountSubmitted++;
@@ -121,12 +119,10 @@ namespace far{
                 glBindBuffer(GL_ARRAY_BUFFER, _bufferID);
                 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _indexBufferID);
                 FAR_DEBUG("Final amount submitted: " << _amountSubmitted);
-                glDrawElements(GL_TRIANGLES, 3, _amountSubmitted*3, 0);
+                glDrawElements(GL_TRIANGLES, _amountSubmitted*3, GL_UNSIGNED_SHORT, 0);
                 _amountSubmitted = 0;
-//              delete [] _indices;
-        
         }
 
-        far::BatchRenderer2D::~BatchRenderer2D(){ delete [] _indices; };
+        far::BatchRenderer2D::~BatchRenderer2D(){ };
 
 }
