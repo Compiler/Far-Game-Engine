@@ -71,16 +71,19 @@ namespace far{
 
                         FAR_LOG("ENTITY#" << i+1);
 
-                        auto currentTransform = manager->getComponent<TransformComponent>(ids[i]);
-                        auto currentRenderable = manager->getComponent<RenderableComponent>(ids[i]);
-                        auto currentMesh = manager->getComponent<MeshComponent>(ids[i]);
+                        std::shared_ptr<TransformComponent> currentTransform = manager->getComponent<TransformComponent>(ids[i]);
+                        std::shared_ptr<RenderableComponent> currentRenderable = manager->getComponent<RenderableComponent>(ids[i]);
+                        std::shared_ptr<MeshComponent> currentMesh = manager->getComponent<MeshComponent>(ids[i]);
+
                         FAR_DEBUG("CURRENT MESH VERTICES SIZE: " << currentMesh->vertices.size());
                         FAR_DEBUG("CURRENT MESH INDICES SIZE:  " << 3*(currentMesh->vertices.size()-2));
-                        for(auto v : currentMesh->vertices) this->_setBuffer(VertexData(v, currentRenderable->color));
+
+                        for(auto vertexPosition : currentMesh->vertices){
+                                this->_setBuffer(VertexData(glm::vec3(vertexPosition.x+currentTransform->position.x, vertexPosition.y+currentTransform->position.y, 1.f), currentRenderable->color));
+                        }
 
                         unsigned short currentInd = 2 + prevInd;
                         bool prevFlag = false;
-
                         // n-2 triangles, 3 indices per triangle
                         // 3(n - 2) where n is currentMesh->vertices.size()
                         for(unsigned int j = 0; j < 3*(currentMesh->vertices.size()-2); j++){
@@ -104,9 +107,10 @@ namespace far{
                         prevInd = currentInd;
 
                 }
+
+                //Indices may change every time submit is called, so the buffer in the data needs to be updated.
                 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _indexBufferID);
                 glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(_ind), _ind, GL_STATIC_DRAW);
-
 
         }
 

@@ -14,7 +14,7 @@ namespace far{
         }
     
     private:
-        void _sortVertices(Entity ent, std::shared_ptr<far::EntityManager> manager) const;
+        void _sortVertices(Entity ent, std::shared_ptr<far::EntityManager> manager);
     };
 
 }
