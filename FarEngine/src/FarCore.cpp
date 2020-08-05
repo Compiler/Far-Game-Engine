@@ -33,6 +33,7 @@ namespace far{
 			frames = 0;
 		}
 		_mps.update(_entityManager);
+		_ms.move(_entityManager->getAssociatedEntities<TransformComponent>()[0], _entityManager, glm::vec3(0.f, 0.01f, 0.f));
     }
 
     void FarCore::render(){

@@ -10,6 +10,7 @@
 #include <EntityComponentSystem/EntityManager.h>
 #include <EntityComponentSystem/Components/Component.h>
 #include <EntityComponentSystem/Systems/MeshProcessorSystem.h>
+#include <EntityComponentSystem/Systems/MovementSystem.h>
 #include <Rendering/Renderers/BatchRenderer2D.h>
 #include <Tools/Files/FileLoaderFactory.h>
 #include <Tools/Logging/TmpLog.h>
@@ -29,7 +30,7 @@ namespace far{
             std::shared_ptr<far::EntityManager> _entityManager;
             far::BatchRenderer2D _batchRenderer;
             far::MeshProcessorSystem _mps;
-	        
+	        far::MovementSystem _ms;
            // ikAudio* audio;
 
         public:
