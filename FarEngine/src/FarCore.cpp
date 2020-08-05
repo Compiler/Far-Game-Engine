@@ -1,5 +1,5 @@
 #include "FarCore.h"
-
+#include "EntityComponentSystem/Systems/MeshProcessorSystem.h"
 
 
 namespace far{
@@ -32,7 +32,7 @@ namespace far{
 			elapsedTime = 0;
 			frames = 0;
 		}
-
+		_mps.update(_entityManager);
     }
 
     void FarCore::render(){

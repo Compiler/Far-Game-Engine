@@ -60,44 +60,45 @@ namespace far{
         }
 
         void far::BatchRenderer2D::submit(std::shared_ptr<far::EntityManager> manager){
+
                 unsigned short prevInd = 0;
-                std::vector<Entity> entitiesToSubmit;
-                std::vector<VertexData> vertices;
                 std::vector<std::vector<std::shared_ptr<Component>>> list = std::vector<std::vector<std::shared_ptr<Component>>>();
+
                 auto ids = manager->getAssociatedEntities<TransformComponent, RenderableComponent, MeshComponent>();
+
                 FAR_LOG("# OF ENTITIES: " << ids.size());
                 for(int i = 0; i < ids.size(); i++){
-                        FAR_DEBUG("ENTITY#" << i);
+
+                        FAR_LOG("ENTITY#" << i+1);
+
                         auto currentTransform = manager->getComponent<TransformComponent>(ids[i]);
                         auto currentRenderable = manager->getComponent<RenderableComponent>(ids[i]);
                         auto currentMesh = manager->getComponent<MeshComponent>(ids[i]);
-                        FAR_DEBUG("CURRENT MESH: " << currentMesh->vertices.size());
-                        for(auto v : currentMesh->vertices){
-                                this->_setBuffer(VertexData(v, currentRenderable->color));
-                        }
-                        // n-2 triangles, 3 indices per triangle
+                        FAR_DEBUG("CURRENT MESH VERTICES SIZE: " << currentMesh->vertices.size());
+                        FAR_DEBUG("CURRENT MESH INDICES SIZE:  " << 3*(currentMesh->vertices.size()-2));
+                        for(auto v : currentMesh->vertices) this->_setBuffer(VertexData(v, currentRenderable->color));
+
                         unsigned short currentInd = 2 + prevInd;
                         bool prevFlag = false;
+
+                        // n-2 triangles, 3 indices per triangle
+                        // 3(n - 2) where n is currentMesh->vertices.size()
                         for(unsigned int j = 0; j < 3*(currentMesh->vertices.size()-2); j++){
-                                if(prevFlag){ // replaced !((i+1)%3); means that modulo doesnt have to be calculated twice
+                                // replaced !((j+1)%3); means that modulo doesnt have to be calculated twice                          
+                                if(prevFlag){ 
                                         currentInd-=2;
                                         prevFlag = false;
                                 }
                                 if(!(j%3)){
                                         _ind[_amountSubmitted] = prevInd;
-                                        FAR_DEBUG(_amountSubmitted << ":" << prevInd);
                                         prevFlag = true;
                                         currentInd++;
-
                                 }
                                 else{
                                         _ind[_amountSubmitted] = currentInd;
-                                        FAR_DEBUG(_amountSubmitted << ":" << currentInd);
                                         currentInd++;
-
                                 }
                                 _amountSubmitted++;
-
                         };
 
                         prevInd = currentInd;

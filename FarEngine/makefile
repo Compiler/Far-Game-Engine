@@ -38,7 +38,7 @@ LINKS = -lglfw3 -lglu32 -lopengl32 -lgdi32 -lirrKlang
 
 OBJECTS = $(OUT_DIR)/FileLoaderFactory.o $(OUT_DIR)/StartupSystems.o $(OUT_DIR)/Window.o\
  $(OUT_DIR)/FarCore.o  $(OUT_DIR)/EntityManager.o $(OUT_DIR)/HashImplementation.o\
- $(OUT_DIR)/BatchRenderer2D.o  $(OUT_DIR)/InputManager.o #$(OUT_DIR)/ikAudio.o  
+ $(OUT_DIR)/BatchRenderer2D.o  $(OUT_DIR)/InputManager.o  $(OUT_DIR)/MeshProcessorSystem.o #$(OUT_DIR)/ikAudio.o  
 all: main
 
 main: $(ENTRY_POINT) FarCore.o
@@ -46,7 +46,7 @@ main: $(ENTRY_POINT) FarCore.o
 
 
 ALL_SETTINGS = $(CXX) $(CXXFLAGS) $(LIBS) $(INC) $(INC_INTERNAL)
-FarCore.o: $(SRC_DIR)/FarCore.cpp StartupSystems.o FileLoaderFactory.o Window.o EntityManager.o HashImplementation.o BatchRenderer2D.o InputManager.o 
+FarCore.o: $(SRC_DIR)/FarCore.cpp StartupSystems.o FileLoaderFactory.o Window.o EntityManager.o HashImplementation.o BatchRenderer2D.o InputManager.o MeshProcessorSystem.o
 	$(ALL_SETTINGS) -c $(SRC_DIR)/FarCore.cpp -o $(OUT_DIR)/FarCore.o 
 
 StartupSystems.o: $(SRC_DIR)/Startup/StartupSystems.cpp
@@ -79,6 +79,8 @@ Logger.o: $(SRC_DIR)/Tools/Logging/Logger.cpp
 ikAudio.o: $(SRC_DIR)/Audio/ikAudio.cpp
 	$(ALL_SETTINGS) -c $(SRC_DIR)/Audio/ikAudio.cpp -o $(OUT_DIR)/ikAudio.o  
 
+MeshProcessorSystem.o: $(SRC_DIR)/EntityComponentSystem/Systems/MeshProcessorSystem.cpp
+	$(ALL_SETTINGS) -c $(SRC_DIR)/EntityComponentSystem/Systems/MeshProcessorSystem.cpp -o $(OUT_DIR)/MeshProcessorSystem.o
 
 run: $(OUT_DIR)/$(LAUNCHER_NAME).exe
 	./$(OUT_DIR)/$(LAUNCHER_NAME).exe

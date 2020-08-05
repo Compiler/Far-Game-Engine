@@ -9,6 +9,7 @@
 #include <iostream>
 #include <EntityComponentSystem/EntityManager.h>
 #include <EntityComponentSystem/Components/Component.h>
+#include <EntityComponentSystem/Systems/MeshProcessorSystem.h>
 #include <Rendering/Renderers/BatchRenderer2D.h>
 #include <Tools/Files/FileLoaderFactory.h>
 #include <Tools/Logging/TmpLog.h>
@@ -27,6 +28,7 @@ namespace far{
 
             std::shared_ptr<far::EntityManager> _entityManager;
             far::BatchRenderer2D _batchRenderer;
+            far::MeshProcessorSystem _mps;
 	        
            // ikAudio* audio;
 
@@ -69,7 +71,7 @@ namespace far{
                 _entityManager->addComponent(entity1, mesh);
                 _entityManager->addComponent(entity1, rend);
                 _entityManager->addComponent(entity1, trans);
-                mesh.vertices = { glm::vec3(0.75f, 0.75f, 1.f), glm::vec3(0.75f, 0.5f, 1.f), glm::vec3(0.5f, 0.5f, 1.f), glm::vec3(0.5f, 0.75f, 1.f) };
+                mesh.vertices = { glm::vec3(0.75f, 0.5f, 1.f), glm::vec3(0.75f, 0.75f, 1.f), glm::vec3(0.5f, 0.5f, 1.f), glm::vec3(0.5f, 0.75f, 1.f) };
                 rend.color = glm::vec4(1.f, 0.f, 1.f, 1.f);
                 _entityManager->addComponent(entity2, mesh);
                 _entityManager->addComponent(entity2, rend);
