@@ -6,7 +6,7 @@ namespace far{
     class MeshProcessorSystem : public System{
     public:
         MeshProcessorSystem(far::EntityManager& manager) : System(manager){};
-
+        MeshProcessorSystem() = default;
         virtual void update(float deltaTime) override{
             std::vector<Entity> meshEntities = _manager->getAssociatedEntities<MeshComponent>();
             for(auto entity : meshEntities) this->_sortVertices(entity);
