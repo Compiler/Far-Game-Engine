@@ -3,8 +3,11 @@
 
 namespace far{
     class System{
+    protected:
+        std::shared_ptr<far::EntityManager> _manager;
     public:
-        virtual void update(std::shared_ptr<far::EntityManager>) = 0;
+        System(far::EntityManager& manager) : _manager(&manager){};
+        virtual void update(float deltaTime) = 0;
         
     };
 }

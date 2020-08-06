@@ -2,9 +2,9 @@
 
 namespace far{
 
-    void MeshProcessorSystem::_sortVertices(Entity ent, std::shared_ptr<far::EntityManager> manager){
+    void MeshProcessorSystem::_sortVertices(Entity ent){
             glm::vec3 center = glm::vec3(0.f, 0.f, 0.f);
-            std::shared_ptr<MeshComponent> meshEnts = manager->getComponent<MeshComponent>(ent);
+            std::shared_ptr<MeshComponent> meshEnts = _manager->getComponent<MeshComponent>(ent);
             for(auto vertex : meshEnts->vertices) center += vertex;
             center /= meshEnts->vertices.size();
             center.z = 1.f;

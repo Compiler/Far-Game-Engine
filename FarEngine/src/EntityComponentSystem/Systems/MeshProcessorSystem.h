@@ -5,16 +5,15 @@ namespace far{
 
     class MeshProcessorSystem : public System{
     public:
+        MeshProcessorSystem(far::EntityManager& manager) : System(manager){};
 
-        virtual void update(std::shared_ptr<far::EntityManager> manager) override{
-            std::vector<Entity> meshEntities = manager->getAssociatedEntities<MeshComponent>();
-            for(auto entity : meshEntities){
-                this->_sortVertices(entity, manager);
-            }
+        virtual void update(float deltaTime) override{
+            std::vector<Entity> meshEntities = _manager->getAssociatedEntities<MeshComponent>();
+            for(auto entity : meshEntities) this->_sortVertices(entity);
         }
     
     private:
-        void _sortVertices(Entity ent, std::shared_ptr<far::EntityManager> manager);
+        void _sortVertices(Entity ent);
     };
 
 }

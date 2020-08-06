@@ -6,6 +6,8 @@ namespace far{
 
    
     void FarCore::load(){
+		_mps = far::MeshProcessorSystem(*_entityManager);
+		_ms = far::MovementSystem(*_entityManager);
 		initForPep();
         //StartupSystems::initSubSystems();
         StartupSystems::_initGLFW();
@@ -16,7 +18,6 @@ namespace far{
         //glViewport(0, 0, 640, 480); //oopsxd
         _batchRenderer = far::BatchRenderer2D();
 		_batchRenderer.init();
-
 
 		//audio = new ikAudio();
 		//audio->playSound(FAR_INTERNAL_SOUNDS("Tension.mp3"));
@@ -32,8 +33,9 @@ namespace far{
 			elapsedTime = 0;
 			frames = 0;
 		}
-		_mps.update(_entityManager);
-		_ms.move(_entityManager->getAssociatedEntities<TransformComponent>()[0], _entityManager, glm::vec3(0.f, 0.01f, 0.f));
+		_mps.update(deltaTime);
+		_ms.move(_entityManager->getAssociatedEntities<TransformComponent>()[0], glm::vec3(0.f, 0.01f, 0.f));
+		_ms.update(deltaTime);
     }
 
     void FarCore::render(){

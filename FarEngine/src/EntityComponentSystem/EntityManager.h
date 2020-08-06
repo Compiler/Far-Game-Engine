@@ -21,7 +21,7 @@ namespace far{
 
 
         public:
-
+            EntityManager() = default;
             Entity createEntity(){
                 Entity entity = _ENTITY_COUNT++;
                 FAR_DEBUG("Entity #" << entity << " created!");
