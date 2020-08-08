@@ -18,6 +18,7 @@ namespace far{
 
 
             GLFWwindow* getWindow()const{return _window;}
+            inline const char* getName() const{return _windowName.c_str();};
 
     };
 

@@ -26,7 +26,8 @@ namespace far{
         private:
             far::Window* _windowRef;
             glm::vec3 thing;
-
+            int _frames;
+            float _fps;
             std::shared_ptr<far::EntityManager> _entityManager;
             far::BatchRenderer2D _batchRenderer;
             far::MeshProcessorSystem _mps;

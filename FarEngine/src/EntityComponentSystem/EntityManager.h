@@ -90,12 +90,11 @@ namespace far{
             std::vector<Entity> getAssociatedEntities(){
                 std::vector<Entity> ids;
                 Entity current;
-                for(int i = 0; i <_entities.size(); i++){
+                // _entities.size() crashes the program. Memory corruption.
+                for(int i = 0; i < _entities.size(); i++){
                     current = _entities[i];
                     if(_ecsMap[current][T().getID()]) ids.push_back(current);
-
                 }
-
                 return ids;
 
             }

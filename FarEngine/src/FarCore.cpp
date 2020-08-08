@@ -1,14 +1,15 @@
 #include "FarCore.h"
 #include "EntityComponentSystem/Systems/MeshProcessorSystem.h"
-
+#include <sstream>
 
 namespace far{
 
    
     void FarCore::load(){
-		_mps = far::MeshProcessorSystem(*_entityManager);
-		_ms = far::MovementSystem(*_entityManager);
 		initForPep();
+		_frames = 0;
+		_mps = far::MeshProcessorSystem(_entityManager);
+		_ms = far::MovementSystem(_entityManager);
         //StartupSystems::initSubSystems();
         StartupSystems::_initGLFW();
         _windowRef = new Window(1080, 720, "Far Game Engine", false);
@@ -18,7 +19,6 @@ namespace far{
         //glViewport(0, 0, 640, 480); //oopsxd
         _batchRenderer = far::BatchRenderer2D();
 		_batchRenderer.init();
-
 		//audio = new ikAudio();
 		//audio->playSound(FAR_INTERNAL_SOUNDS("Tension.mp3"));
 
@@ -31,10 +31,15 @@ namespace far{
 		elapsedTime += deltaTime;
 		if(elapsedTime >= 1.0){
 			elapsedTime = 0;
-			frames = 0;
+			_fps = _frames/(deltaTime);
+			_frames = 0;
 		}
+		_frames++;
+		std::stringstream ss;
+		ss << _windowRef->getName() << " - " << _fps << " FPS";
+		glfwSetWindowTitle(_windowRef->getWindow(), ss.str().c_str());
 		_mps.update(deltaTime);
-		_ms.move(_entityManager->getAssociatedEntities<TransformComponent>()[0], glm::vec3(0.f, 0.01f, 0.f));
+		_ms.move(_entityManager->getAssociatedEntities<TransformComponent>()[0], glm::vec3(0.f, 0.1f, 0.f));
 		_ms.update(deltaTime);
     }
 
