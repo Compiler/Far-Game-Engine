@@ -1,4 +1,4 @@
-# Far Game Engine
+# Far-Game-Engine
 OpenGL based game engine
 
 ## Design Ideology
