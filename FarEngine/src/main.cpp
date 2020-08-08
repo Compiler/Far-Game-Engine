@@ -5,7 +5,7 @@ int main(int argc, char* argv[]){
 	far::FarCore* core = new far::FarCore();
 	
 	
-	core->load();
+	core->init();
 	while(core->isRunning()){
 		core->update();
 		core->render();

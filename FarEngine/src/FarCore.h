@@ -38,7 +38,6 @@ namespace far{
 
             void initForPep(){
 
-                _entityManager = std::make_shared<far::EntityManager>();
                 far::Entity entity1 = _entityManager->createEntity();
                 far::Entity entity2 = _entityManager->createEntity();
                 far::Entity entity3 = _entityManager->createEntity();
@@ -68,7 +67,8 @@ namespace far{
                 _entityManager->addComponent(entity3, rend);                
                 _entityManager->addComponent(entity3, trans);                
             }
-            void load();
+            void init();
+            void _load();
             void update();
             void render();
             void unload();
@@ -81,7 +81,6 @@ namespace far{
 
             double startFrameTime, deltaTime, lastFrameTime, elapsedTime, frames;
 
-            void init();
             void loadShaders(const char*, const char*);
     };
 
